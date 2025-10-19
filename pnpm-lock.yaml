@@ -11,6 +11,9 @@ importers:
 
   .:
     dependencies:
+      '@fisch0920/medium-zoom':
+        specifier: ^1.0.7
+        version: 1.0.7
       '@fortawesome/fontawesome-svg-core':
         specifier: ^6.7.1
         version: 6.7.2

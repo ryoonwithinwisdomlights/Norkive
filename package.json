@@ -22,6 +22,7 @@
     "bundle-report": "ANALYZE=true yarn build"
   },
   "dependencies": {
+    "@fisch0920/medium-zoom": "^1.0.7",
     "@fortawesome/fontawesome-svg-core": "^6.7.1",
     "@fortawesome/free-solid-svg-icons": "^6.7.1",
     "@fortawesome/react-fontawesome": "^0.2.2",
