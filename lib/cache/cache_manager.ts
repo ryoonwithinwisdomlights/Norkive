@@ -16,9 +16,17 @@ export async function getDataFromCache(
 ): Promise<any | null> {
   if (!BLOG.ENABLE_CACHE) return null;
 
-  const cached = useRedis
-    ? await redis!.get(key)
-    : await MemoryCache.getCache(key);
+  let cached;
+  if (useRedis) {
+    try {
+      cached = await redis!.get(key);
+    } catch (error) {
+      console.warn("[Redis] getCache failed, fallback to Memory:", error);
+      cached = await MemoryCache.getCache(key);
+    }
+  } else {
+    cached = await MemoryCache.getCache(key);
+  }
 
   console.log(
     `[Cache ${useRedis ? "Redis" : "Memory"}] get: ${key} →`,
@@ -29,22 +37,30 @@ export async function getDataFromCache(
 
 export async function setDataToCache(key: string, data: any): Promise<void> {
   if (useRedis) {
-    await redis!.set(key, data, { ex: TTL }); // 10분 TTL
-    console.log("[Redis] setCache:", key);
-  } else {
-    await MemoryCache.setCache(key, data); // 기존 memory-cache TTL 사용
-    console.log("[Memory] setCache:", key);
+    try {
+      await redis!.set(key, data, { ex: TTL }); // 10분 TTL
+      console.log("[Redis] setCache:", key);
+      return;
+    } catch (error) {
+      console.warn("[Redis] setCache failed, fallback to Memory:", error);
+    }
   }
+  await MemoryCache.setCache(key, data); // 기존 memory-cache TTL 사용
+  console.log("[Memory] setCache:", key);
 }
 
 export async function delCacheData(key: string): Promise<void> {
   if (!BLOG.ENABLE_CACHE) return;
 
   if (useRedis) {
-    await redis!.del(key);
-    console.log("[Redis] delCache:", key);
-  } else {
-    await MemoryCache.delCache(key);
-    console.log("[Memory] delCache:", key);
+    try {
+      await redis!.del(key);
+      console.log("[Redis] delCache:", key);
+      return;
+    } catch (error) {
+      console.warn("[Redis] delCache failed, fallback to Memory:", error);
+    }
   }
+  await MemoryCache.delCache(key);
+  console.log("[Memory] delCache:", key);
 }
