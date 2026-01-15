@@ -64,7 +64,7 @@
     "lucide-react": "^0.525.0",
     "memory-cache": "^0.2.0",
     "motion": "^12.23.0",
-    "next": "^15.1.2",
+    "next": "15.1.11",
     "nextjs-progressbar": "^0.0.16",
     "notion-client": "^7.7.3",
     "notion-types": "^7.7.3",
