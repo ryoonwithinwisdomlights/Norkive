@@ -18,6 +18,10 @@ export const MenuItemDrop = ({ link }) => {
   const router = useRouter();
   const onClickUrl = (sLink) => {
     if (sLink) {
+      if (sLink?.type === "SubMenuPage" && !sLink?.id) {
+        console.warn("[Menu] SubMenuPage missing id:", sLink);
+        return;
+      }
       const href =
         sLink?.type === "SubMenuPage" ? `/intro/${sLink?.id}` : sLink?.slug;
       if (sLink?.slug?.includes("http")) {

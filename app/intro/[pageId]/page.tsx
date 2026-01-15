@@ -15,7 +15,7 @@ export async function generateStaticParams() {
 export default async function Page({ params }) {
   const { pageId } = await params;
 
-  if (!pageId) {
+  if (!pageId || pageId === "undefined" || pageId === "null") {
     return <ErrorComponent />;
   }
 

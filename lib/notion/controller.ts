@@ -45,7 +45,12 @@ export async function getARecordPageById({
   type,
   from,
 }: PageBlockDataProps) {
-  if (!pageId || typeof pageId !== "string") {
+  if (
+    !pageId ||
+    typeof pageId !== "string" ||
+    pageId === "undefined" ||
+    pageId === "null"
+  ) {
     console.error("❌ pageId가 undefined임!", pageId);
     console.trace();
     return null;
