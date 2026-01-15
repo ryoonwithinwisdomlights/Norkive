@@ -24,7 +24,6 @@ const RecordBodyForPage = () => {
   const { allPages } = useGlobal({ from: type });
   const recordList = getFilteredRecordList(allPages, type.toUpperCase());
 
-  console.log("recordList:", recordList);
   return (
     <div className="flex flex-col">
       {/* <SubTypeCarousel items={submenuItems} /> */}
