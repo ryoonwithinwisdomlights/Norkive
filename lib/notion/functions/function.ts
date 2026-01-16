@@ -424,11 +424,10 @@ export function processingAllPagesWithTypeAndSort(
         return false;
       }
 
+      const chaeckType = type ? type : page.type;
       const isVisible = page.status === "Published";
 
-      const isTypeMatched = !EXCLUDED_PAGE_TYPES.includes(type)
-        ? page.type === type && page.status === "Published"
-        : true;
+      const isTypeMatched = chaeckType === page.type;
 
       if (isTypeMatched) {
         counterObj.count++;
@@ -607,7 +606,14 @@ export function setAllPagesGetSortedGroupedByDate(dateSort, allPages) {
   if (dateSort === true) {
     const pageSortedByDate = setPageSortedByDate(allPages);
     const pageGroupedByDate = setPageGroupedByDate(pageSortedByDate);
-    result = pageGroupedByDate;
+    const availablePages = Object.keys(pageGroupedByDate).filter((date) =>
+      AVAILABLE_PAGE_TYPES.includes(pageGroupedByDate[date][0]?.type)
+    );
+    result = availablePages.reduce((acc, date) => {
+      acc[date] = pageGroupedByDate[date];
+      return acc;
+    }, {});
+    // console.log("result:::", result);
   }
   return result;
 }

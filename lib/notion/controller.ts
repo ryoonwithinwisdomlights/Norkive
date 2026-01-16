@@ -25,13 +25,7 @@ export async function getAllRecordPageListByType({
     pageId: BLOG.NOTION_DATABASE_ID as string,
     type: type,
   });
-  // if (!data) {
-  //   console.error(
-  //     "can`t get Notion Data ; id is: ",
-  //     BLOG.NOTION_DATABASE_ID as string
-  //   );
-  //   return {};
-  // }
+
   const resolvedData = applyDataBaseProcessing(data);
 
   // resolvedData.allPages = allPages;
