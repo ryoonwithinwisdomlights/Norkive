@@ -19,8 +19,7 @@
     "prettier": "prettier --write --ignore-unknown .",
     "prettier:check": "prettier --check --ignore-unknown .",
     "export": "next build && next export",
-    "bundle-report": "ANALYZE=true yarn build",
-    "vercel-install": "pnpm install --no-frozen-lockfile"
+    "bundle-report": "ANALYZE=true yarn build"
   },
   "dependencies": {
     "@fisch0920/medium-zoom": "^1.0.7",
@@ -65,7 +64,7 @@
     "lucide-react": "^0.525.0",
     "memory-cache": "^0.2.0",
     "motion": "^12.23.0",
-    "next": "15.1.11",
+    "next": "^15.5.9",
     "nextjs-progressbar": "^0.0.16",
     "notion-client": "^7.7.3",
     "notion-types": "^7.7.3",
@@ -130,7 +129,7 @@
     "axios": ">=0.21.1"
   },
   "engines": {
-    "node": " 22.18.0"
+    "node": ">=22.18.0"
   },
   "bugs": {
     "url": "https://github.com/ryoonwithinwisdomlights/norkive/issues",
