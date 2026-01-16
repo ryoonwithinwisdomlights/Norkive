@@ -1,8 +1,8 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-# /_Refactoring/*
+/_Refactoring/*
 
-# /_Refactoring/work-log.md
+/_Refactoring/work-log.md
 # dependencies
 /node_modules
 /.pnpm-store
