@@ -393,23 +393,6 @@ export function generateMenuItem(data: BaseArchivePageBlock) {
   return item;
 }
 
-export function generateLeftSideBarItem(data: BaseArchivePageBlock) {
-  const item: LeftSideBarNavItem = {
-    id: data.id,
-    title: data.title || "",
-    pageCoverThumbnail: data.pageCoverThumbnail || "",
-    category: data.category || "",
-    tags: data.tags || null,
-    summary: data.summary || null,
-    slug: data.slug,
-    pageIcon: data.pageIcon || "",
-    date: data.date,
-    lastEditedDate: formatDate(data.lastEditedDate, BLOG.LANG),
-    type: data.type,
-  };
-  return item;
-}
-
 export function processingAllPagesWithTypeAndSort(
   arr,
   counterObj,
