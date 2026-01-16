@@ -1,22 +1,9 @@
 import { useGlobal } from "@/lib/context/EssentialNavInfoProvider";
 import { getFilteredRecordList } from "@/lib/notion/functions/function";
 import LazyImage from "@/modules/common/components/shared/LazyImage";
-import SubTypeCarousel from "@/modules/common/components/SubTypeCarousel";
 import { usePathname } from "next/navigation";
 import NoRecordFound from "./NoRecordFound";
 import RecordCardInfo from "./RecordCardInfo";
-
-const submenuItems = [
-  { id: "1", title: "JavaScript", href: "/category/javascript" },
-  { id: "2", title: "TypeScript", href: "/category/typescript" },
-  { id: "3", title: "React", href: "/category/react" },
-  { id: "4", title: "Next.js", href: "/category/nextjs" },
-  { id: "5", title: "CSS", href: "/category/css" },
-  { id: "6", title: "Tailwind", href: "/category/tailwind" },
-  { id: "7", title: "Network", href: "/category/redux" },
-  { id: "8", title: "Database", href: "/category/redux" },
-  { id: "9", title: "Redux", href: "/category/redux" },
-];
 
 const RecordBodyForPage = () => {
   const pathname = usePathname();
@@ -24,10 +11,8 @@ const RecordBodyForPage = () => {
   const { allPages } = useGlobal({ from: type });
   const recordList = getFilteredRecordList(allPages, type.toUpperCase());
 
-  console.log("recordList:", recordList);
   return (
     <div className="flex flex-col">
-      {/* <SubTypeCarousel items={submenuItems} /> */}
       <div className="flex flex-row justify-end">
         <div className="space-y-6 w-full px-2">
           {recordList && recordList.length > 0 ? (

@@ -17,7 +17,7 @@ export const BLOG = {
   BIO:
     process.env.NEXT_PUBLIC_BIO ||
     "A Software Engineer who likes to Giveaway to the World with Joy, Love and Lights.", //About the author
-  LINK: process.env.NEXT_PUBLIC_LINK || "", // website address process.env.NEXT_PUBLIC_LINK || NEXT_PUBLIC_LINK,
+  LINK: process.env.NEXT_PUBLIC_LINK || "https://basicnorkive.vercel.app/", // website address process.env.NEXT_PUBLIC_LINK || NEXT_PUBLIC_LINK,
   DEV_LINK: process.env.NEXT_PUBLIC_LINK_DEV, // link only for dev mode.
   KEYWORDS:
     process.env.NEXT_PUBLIC_KEYWORD ||
@@ -232,8 +232,6 @@ export const BLOG = {
     process.env.NEXT_PUBLIC_IMG_LAZY_LOAD_PLACEHOLDER ||
     "data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==", // Lazy loading of placeholder image address, supports base64 or url
   IMG_URL_TYPE: process.env.NEXT_PUBLIC_IMG_TYPE || "Notion", // This configuration is invalid, please do not use it; the AMAZON solution is no longer supported, only the Notion solution is supported. ['Notion','AMAZON'] Site image prefix Default Notion:(https://notion.so/images/xx) , AMAZON(https://s3.us-west-2.amazonaws.com/xxx)
-  IMG_SHADOW: process.env.NEXT_PUBLIC_IMG_SHADOW || false, // Whether to automatically add shadows to data images
-  IMG_COMPRESS_WIDTH: process.env.NEXT_PUBLIC_IMG_COMPRESS_WIDTH || 800,
 
   // development related
 

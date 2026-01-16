@@ -10,13 +10,13 @@ import GeneralRecordTypePageWrapper from "@/modules/layout/templates/GeneralReco
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
-export async function generateStaticParams() {
-  const records = [{ pageId: "1481eb5c-0337-8087-a304-f2af3275be11" }];
+// export async function generateStaticParams() {
+//   const records = [{ pageId: "1481eb5c-0337-8087-a304-f2af3275be11" }];
 
-  return records.map((record) => ({
-    pageId: record.pageId,
-  }));
-}
+//   return records.map((record) => ({
+//     pageId: record.pageId,
+//   }));
+// }
 
 export async function generateMetadata({ params }): Promise<Metadata> {
   const { pageId } = params;

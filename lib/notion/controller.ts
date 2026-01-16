@@ -1,15 +1,14 @@
 import { BLOG } from "@/blog.config";
 import {
   getFilteredArrayByProperty,
-  setAllPagesGetSortedGroupedByDate,
   setPageTableOfContentsByRecord,
 } from "@/lib/notion/functions/function";
+import { applyDataBaseProcessing } from "@/lib/notion/functions/utils";
 import {
   getGlobalRecordPageData,
   getSingleRecordPageData,
 } from "@/lib/notion/serviceImpl";
 import { PageBlockDataProps } from "@/types";
-import { applyDataBaseProcessing } from "@/lib/notion/functions/utils";
 
 //디렉토리별 전체글 페이지
 export async function getAllRecordPageListByType({
@@ -26,13 +25,7 @@ export async function getAllRecordPageListByType({
     pageId: BLOG.NOTION_DATABASE_ID as string,
     type: type,
   });
-  // if (!data) {
-  //   console.error(
-  //     "can`t get Notion Data ; id is: ",
-  //     BLOG.NOTION_DATABASE_ID as string
-  //   );
-  //   return {};
-  // }
+
   const resolvedData = applyDataBaseProcessing(data);
 
   // resolvedData.allPages = allPages;
@@ -45,7 +38,12 @@ export async function getARecordPageById({
   type,
   from,
 }: PageBlockDataProps) {
-  if (!pageId || typeof pageId !== "string") {
+  if (
+    !pageId ||
+    typeof pageId !== "string" ||
+    pageId === "undefined" ||
+    pageId === "null"
+  ) {
     console.error("❌ pageId가 undefined임!", pageId);
     console.trace();
     return null;

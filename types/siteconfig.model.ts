@@ -38,7 +38,6 @@ export interface SiteConfigModel {
   right_click_context_menu?: string;
   isPreviewImageSupportEnabled?: boolean;
   isTweetEmbedSupportEnabled?: boolean;
-  isRedisEnabled?: boolean;
   includeNotionIdInUrls?: boolean;
   pageUrlOverrides?: types.PageUrlOverridesMap | null;
   pageUrlAdditions?: types.PageUrlOverridesMap | null;

@@ -8,15 +8,15 @@ import ErrorComponent from "@/modules/common/components/shared/ErrorComponent";
 import RightSlidingDrawer from "@/modules/layout/components/RightSlidingDrawer";
 import GeneralRecordTypePageWrapper from "@/modules/layout/templates/GeneralRecordTypePageWrapper";
 
-export async function generateStaticParams() {
-  const records = [
-    { pageId: "1341eb5c-0337-81ad-a46c-d94c8abcdada" },
-    { pageId: "another-record-id" },
-  ];
-  return records.map((record) => ({
-    pageId: record.pageId,
-  }));
-}
+// export async function generateStaticParams() {
+//   const records = [
+//     { pageId: "1341eb5c-0337-81ad-a46c-d94c8abcdada" },
+//     { pageId: "another-record-id" },
+//   ];
+//   return records.map((record) => ({
+//     pageId: record.pageId,
+//   }));
+// }
 
 export async function generateMetadata({ params }): Promise<Metadata> {
   const { pageId } = await params;
