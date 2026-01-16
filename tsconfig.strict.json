@@ -1,0 +1,19 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "strict": true,
+    "noImplicitAny": false,
+    "allowJs": false
+  },
+  "include": [
+    "global.d.ts",
+    "app/**/*.ts",
+    "app/**/*.tsx",
+    "lib/cache/cache_manager.ts",
+    "lib/cache/memory_cache.ts",
+    "lib/notion/api/getAllPageIdForCache.ts",
+    "lib/notion/api/getStaticPageParams.ts",
+    "types/**/*.ts"
+  ]
+}
+

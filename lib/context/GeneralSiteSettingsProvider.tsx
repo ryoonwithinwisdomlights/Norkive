@@ -38,7 +38,9 @@ export const GeneralSiteSettingsProvider: React.FC<{
   allPagesForLeftNavBar: LeftSideBarNavItem[];
 }> = ({ children, allPagesForLeftNavBar }) => {
   const [lang, updateLang] = useState<string>(BLOG.LANG); // default language
-  const [locale, updateLocale] = useState<any>(generateLocaleDict(BLOG.LANG));
+  const [locale, updateLocale] = useState<Record<string, any>>(
+    generateLocaleDict(BLOG.LANG)
+  );
   const [setting, SetSettingState] = useState<boolean>(false);
   const [isDarkMode, updateDarkMode] = useState<boolean>(
     BLOG.APPEARANCE === "dark"
@@ -58,7 +60,7 @@ export const GeneralSiteSettingsProvider: React.FC<{
 
   const handleLeftNavVisible = () => setPageNavVisible(!pageNavVisible);
 
-  function changeLang(lang) {
+  function changeLang(lang: string) {
     if (lang) {
       saveLangToLocalStorage(lang);
       updateLang(lang);

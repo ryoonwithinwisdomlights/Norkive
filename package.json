@@ -17,6 +17,8 @@
     "build": "rm -rf .next && next build",
     "start": "NODE_OPTIONS='--inspect' next build && next start",
     "lint": "next lint",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "typecheck:strict": "tsc -p tsconfig.strict.json --noEmit",
     "prettier": "prettier --write --ignore-unknown .",
     "prettier:check": "prettier --check --ignore-unknown .",
     "export": "next build && next export",

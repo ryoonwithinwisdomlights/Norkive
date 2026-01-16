@@ -20,7 +20,7 @@ export function EssentialNavInfoProvider({
 }: {
   children: ReactNode;
   from?: string;
-  globalNotionData;
+  globalNotionData: GlobalNotionData;
 }) {
   const {
     siteInfo,
@@ -38,7 +38,7 @@ export function EssentialNavInfoProvider({
 
   const router = useRouter();
 
-  const handleRouter = (page) => {
+  const handleRouter = (page: BaseArchivePageBlock) => {
     router.push(`/${page.slug}`);
   };
   const cleanCurrentRecordData = () => {
@@ -54,8 +54,8 @@ export function EssentialNavInfoProvider({
         oldNav,
         customMenu,
         notice,
-        latestRecords,
-        allPages,
+        latestRecords: latestRecords ?? [],
+        allPages: allPages ?? [],
         // currentRecordData,
         handleRouter,
         cleanCurrentRecordData,

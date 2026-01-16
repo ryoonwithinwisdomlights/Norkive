@@ -9,11 +9,11 @@ export interface EssentialNavInfo {
   siteInfo: SiteInfoModel;
   categoryOptions?: SelectOption[];
   tagOptions?: SelectOption[];
-  subTypeOptions?: [];
+  subTypeOptions?: SelectOption[];
   oldNav?: OldNavItem[];
   customMenu: NavItem[];
   notice: any;
-  latestRecords: [];
+  latestRecords: BaseArchivePageBlock[];
   allPages: BaseArchivePageBlock[];
   handleRouter: (page: BaseArchivePageBlock) => void;
   cleanCurrentRecordData: () => void;
@@ -24,10 +24,10 @@ export interface GlobalNotionData {
   siteInfo: SiteInfoModel;
   categoryOptions?: SelectOption[];
   tagOptions?: SelectOption[];
-  subTypeOptions?: [];
+  subTypeOptions?: SelectOption[];
   oldNav?: OldNavItem[];
   customMenu: NavItem[];
-  latestRecords?: [];
+  latestRecords?: BaseArchivePageBlock[];
   allPagesForLeftNavBar: LeftSideBarNavItem[];
   allPages?: BaseArchivePageBlock[];
 }
@@ -47,7 +47,7 @@ export interface GeneralSiteSettingsProviderContext {
   handleTOCVisible: () => void;
   handleChangeDarkMode: (boolean) => void;
   locale: any;
-  updateLocale: Dispatch<SetStateAction<string>>;
+  updateLocale: Dispatch<SetStateAction<any>>;
   lang: string;
   changeLang: (text: string) => void;
   changeOppositeLang: () => void;

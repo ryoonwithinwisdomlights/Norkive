@@ -12,7 +12,11 @@ import GeneralRecordTypePageWrapper from "@/modules/layout/templates/GeneralReco
 // }
 
 // `generateStaticParams`가 반환한 `params`를 사용하여 이 페이지의 여러 버전이 정적으로 생성됩니다.
-export default async function Page({ params }) {
+export default async function Page({
+  params,
+}: {
+  params: Promise<{ pageId: string }>;
+}) {
   const { pageId } = await params;
 
   if (!pageId || pageId === "undefined" || pageId === "null") {
