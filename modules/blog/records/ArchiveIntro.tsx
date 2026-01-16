@@ -1,12 +1,9 @@
+import { useGlobal } from "@/lib/context/EssentialNavInfoProvider";
+import { setAllPagesGetSortedGroupedByDate } from "@/lib/notion/functions/function";
 import { isObjectNotEmpty } from "@/lib/utils/utils";
-import React from "react";
+import { usePathname } from "next/navigation";
 import AllRecords from "./AllRecords";
 import NoRecordFound from "./NoRecordFound";
-import HeaderSearch from "@/modules/common/components/HeaderSearch";
-import { useGeneralSiteSettings } from "@/lib/context/GeneralSiteSettingsProvider";
-import { useGlobal } from "@/lib/context/EssentialNavInfoProvider";
-import { usePathname } from "next/navigation";
-import { setAllPagesGetSortedGroupedByDate } from "@/lib/notion/functions/function";
 
 const ArchiveIntro = () => {
   const pathname = usePathname();

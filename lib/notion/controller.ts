@@ -1,15 +1,14 @@
 import { BLOG } from "@/blog.config";
 import {
   getFilteredArrayByProperty,
-  setAllPagesGetSortedGroupedByDate,
   setPageTableOfContentsByRecord,
 } from "@/lib/notion/functions/function";
+import { applyDataBaseProcessing } from "@/lib/notion/functions/utils";
 import {
   getGlobalRecordPageData,
   getSingleRecordPageData,
 } from "@/lib/notion/serviceImpl";
 import { PageBlockDataProps } from "@/types";
-import { applyDataBaseProcessing } from "@/lib/notion/functions/utils";
 
 //디렉토리별 전체글 페이지
 export async function getAllRecordPageListByType({

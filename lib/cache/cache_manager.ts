@@ -2,7 +2,8 @@ import MemoryCache from "./memory_cache";
 import { isRedisConfigured, redis } from "@/lib/redis"; // Upstash Redis 인스턴스
 import { BLOG } from "@/blog.config";
 
-const isProd = BLOG.isProd;
+// const isProd = BLOG.isProd;
+const isProd = false;
 const TTL = isProd ? 600 : 7200; // prod: 10min, dev: 2h
 const useRedis = isProd && isRedisConfigured;
 /**
