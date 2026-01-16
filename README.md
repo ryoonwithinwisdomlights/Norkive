@@ -1,5 +1,7 @@
 ## RyoonGitbookLog
 
+![RyoonGitbookLog Intro](public/images/Intro_260116.png)
+
 Notion 데이터베이스를 CMS로 사용하는 **Next.js 15 (App Router) + TypeScript** 기반 블로그/문서 프레임워크입니다.  
 사용자는 Notion 템플릿을 복제한 뒤, 환경변수만 설정하면 로컬 실행 및 배포가 가능합니다.
 
@@ -7,7 +9,7 @@ Notion 데이터베이스를 CMS로 사용하는 **Next.js 15 (App Router) + Typ
 > - [transitive-bullshit/nextjs-notion-starter-kit](https://github.com/transitive-bullshit/nextjs-notion-starter-kit)
 > - [tangly1024/NotionNext](https://github.com/tangly1024/NotionNext)
 >
-> 히스토리상 NotionNext(Next.js 13 Page Router 기반,전부 JS로 작성된)의 Gitbook Theme에서 출발했지만, 현재 RyoonGitbookLog는 **Next.js 15 App Router 기반 + TypeScript**로 재구성되면서 구현/구조가 크게 달라졌습니다.
+> 히스토리상 NotionNext(Next.js 13 Page Router 기반,전부 JS로 작성된)의 Gitbook Theme에서 출발했지만, 현재 RyoonGitbookLog는 **Next.js 15 App Router 기반 + TypeScript**로 전체 마이그레이션 및 재구성하면서 구현/구조가 크게 달라졌습니다.
 
 ### Notion 템플릿 (복제해서 사용)
 

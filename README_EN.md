@@ -1,5 +1,7 @@
 # RyoonGitbookLog
 
+![RyoonGitbookLog Intro](public/images/Intro_260116.png)
+
 A Notion database–powered blog / documentation framework built with **Next.js 15 (App Router) + TypeScript**.  
 Users can duplicate the Notion template, set a few environment variables, and run/deploy the site.
 
