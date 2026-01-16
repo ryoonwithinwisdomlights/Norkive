@@ -11,12 +11,10 @@ const ArchiveIntro = () => {
   const { allPages } = useGlobal({ from: type });
   const isAble = isObjectNotEmpty(allPages);
 
-  // console.log("allPages:::", allPages);
   const modAllPages = isAble
     ? setAllPagesGetSortedGroupedByDate(true, allPages)
     : {};
 
-  console.log("modAllPages:::", modAllPages);
   return (
     <div
       id="main-scroll-container"

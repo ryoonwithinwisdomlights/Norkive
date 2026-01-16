@@ -1,19 +1,5 @@
 import { BLOG } from "@/blog.config";
-import {
-  BaseArchivePageBlock,
-  BlockEntriesItem,
-  CategoryItem,
-  CollectionQueryResultView,
-  FlterBlockType,
-  LeftSideBarNavItem,
-  NavItem,
-  OldNavItem,
-  RecommendPage,
-  SiteInfoModel,
-  TagItem,
-} from "@/types";
-import md5 from "js-md5";
-import { CollectionPropertySchemaMap } from "notion-types";
+import { CodeLanguages } from "@/constants/code.languge";
 import {
   ARCHIVE_PROPERTIES_STATUS_MAP,
   ARCHIVE_PROPERTIES_TYPE_MAP,
@@ -23,15 +9,6 @@ import {
   INCLUDED_MENU_TYPES,
   PAGE_TYPE_MENU,
 } from "@/constants/menu.constants";
-import { getOldsiteConfig } from "@/lib/utils/get-config-value";
-import {
-  convertUrlStartWithOneSlash,
-  deepClone,
-  formatDate,
-  getLastSegmentFromUrl,
-  isStartWithHttp,
-} from "@/lib/utils/utils";
-import { defaultMapImageUrl, getPageTableOfContents } from "notion-utils";
 import {
   compressImage,
   extractLangPrefix,
@@ -39,7 +16,28 @@ import {
   setPageGroupedByDate,
   setPageSortedByDate,
 } from "@/lib/notion/functions/utils";
-import { CodeLanguages } from "@/constants/code.languge";
+import { getOldsiteConfig } from "@/lib/utils/get-config-value";
+import {
+  convertUrlStartWithOneSlash,
+  deepClone,
+  getLastSegmentFromUrl,
+  isStartWithHttp,
+} from "@/lib/utils/utils";
+import {
+  BaseArchivePageBlock,
+  BlockEntriesItem,
+  CategoryItem,
+  CollectionQueryResultView,
+  FlterBlockType,
+  NavItem,
+  OldNavItem,
+  RecommendPage,
+  SiteInfoModel,
+  TagItem,
+} from "@/types";
+import md5 from "js-md5";
+import { CollectionPropertySchemaMap } from "notion-types";
+import { defaultMapImageUrl, getPageTableOfContents } from "notion-utils";
 
 export function getFilteredRecordList(allPages, type) {
   const allpageCounter = { count: 0 };
@@ -179,7 +177,7 @@ export function getCustomNav({
  * @param {*}} param0
  * @returns
  */
-export function getLatestRecords({ allPages, from, latestpageCount }) {
+export function getLatestRecords({ allPages, latestpageCount }) {
   const allrecords = getAllPagesWithoutMenu({ arr: allPages });
   const latestRecords = [...allrecords].sort((a, b) => {
     const dateA = new Date(a?.lastEditedDate || a?.publishDate);
@@ -300,7 +298,7 @@ export function getAllPagesWithoutMenu({
   type?: string;
 }) {
   return getCopiedArrayWithFunction({
-    arr: arr,
+    arr,
     func: (arr) => {
       return arr.filter((item) => getPageWithOutMenu(item, type));
     },
@@ -521,7 +519,9 @@ export function getAllBlockIds(
         }
       }
     }
-  } catch (error) {}
+  } catch (error) {
+    console.error(error);
+  }
 
   // Otherwise, according to the original sorting of the database
   if (
@@ -565,7 +565,9 @@ export function getAllBlockIds2({
         }
       }
     }
-  } catch (error) {}
+  } catch (error) {
+    console.error(error);
+  }
 
   // Otherwise, according to the original sorting of the database
   if (

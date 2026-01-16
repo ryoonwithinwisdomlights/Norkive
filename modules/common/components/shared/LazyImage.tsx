@@ -23,7 +23,7 @@ export default function LazyImage({
   onLoad,
   style,
 }: LazyImageProps) {
-  const imageRef = useRef(null);
+  const imageRef = useRef<HTMLImageElement | null>(null);
   const [imageLoaded, setImageLoaded] = useState(false);
 
   const handleImageLoad = () => {

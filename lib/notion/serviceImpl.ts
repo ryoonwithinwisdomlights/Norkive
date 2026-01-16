@@ -1,6 +1,5 @@
 /* eslint-disable no-unused-vars */
 import { BLOG } from "@/blog.config";
-import { fetchInBatches } from "@/lib/notion/api/getBatchedBlocks";
 import {
   getPageProperties,
   getSinglePageProperties,
@@ -43,7 +42,7 @@ export async function getGlobalRecordPageData({
 
   const pageRecordMap = await getRecordBlockMapWithRetry({
     pageId: parsedId,
-    from: from,
+    from,
     retryAttempts: 3,
   });
 
@@ -158,7 +157,6 @@ export async function getGlobalRecordPageData({
   const customMenu = await getCustomNav({ allPages });
   const latestRecords = getLatestRecords({
     allPages,
-    from,
     latestpageCount: 6,
   });
 

@@ -15,7 +15,7 @@ import { useGeneralSiteSettings } from "@/lib/context/GeneralSiteSettingsProvide
 import { loadExternalResource } from "@/lib/utils/utils";
 import { useRouter } from "next/navigation";
 
-const PrismMac = (): JSX.Element => {
+const PrismMac = () => {
   const router = useRouter();
   const { isDarkMode } = useGeneralSiteSettings();
 
@@ -47,7 +47,7 @@ const PrismMac = (): JSX.Element => {
     });
   }, [router, isDarkMode]);
 
-  return <></>;
+  return null;
 };
 
 const loadPrismThemeCSS = (

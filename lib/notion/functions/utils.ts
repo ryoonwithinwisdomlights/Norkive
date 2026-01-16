@@ -173,23 +173,6 @@ export function applyDataBaseProcessing(data) {
   delete db.collectionQuery;
   delete db.collectionId;
   delete db.collectionView;
-  // Sensitive data not returned
-  // Clean up excess blocks
-  // if (db?.notice) {
-  //   db.notice = cleanBlock(db?.notice);
-  //   delete db.notice?.id;
-  // }
-
-  // db.tagOptions = cleanIds(db?.tagOptions)
-  // db.categoryOptions = cleanIds(db?.categoryOptions)
-  // db.customMenu = cleanIds(db?.customMenu)
-
-  // //   db.latestRecords = shortenIds(db?.latestRecords)
-  // db.allNavPages = shortenIds(db?.allNavPages)
-  // //   db.allPages = cleanBlocks(db?.allPages)
-
-  // db.allPagesForLeftNavBar = cleanPages(db?.allPagesForLeftNavBar, db.tagOptions)
-  // db.allPages = cleanPages(db.allPages, db.tagOptions)
 
   return db;
 }

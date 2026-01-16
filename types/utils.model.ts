@@ -1,3 +1,5 @@
+import type { CSSProperties, RefObject } from "react";
+
 export type LazyImageProps = {
   priority?: any;
   id?: any;
@@ -12,7 +14,7 @@ export type LazyImageProps = {
   style?: any;
 };
 export type ImgProps = {
-  ref: React.RefObject<HTMLImageElement>;
+  ref: RefObject<HTMLImageElement | null>;
   src: string;
   alt: string;
   onLoad: () => void;
@@ -21,7 +23,7 @@ export type ImgProps = {
   width?: string | number;
   height?: string | number;
   className?: string;
-  style?: React.CSSProperties;
+  style?: CSSProperties;
 };
 export type WindowSize = {
   width: number | undefined;

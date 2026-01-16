@@ -2,7 +2,7 @@
 
 import KaTeX from "katex";
 import React, { useEffect, useState } from "react";
-import { ReactNode } from "react";
+import type { ElementType, ReactNode } from "react";
 export type KaTeXProps = {
   children?: string;
   math?: string;
@@ -10,7 +10,7 @@ export type KaTeXProps = {
   errorColor?: string;
   renderError?: (error: Error) => ReactNode;
   settings?: KaTeX.KatexOptions;
-  as?: keyof JSX.IntrinsicElements;
+  as?: ElementType;
   [key: string]: any; // 추가적인 prop 허용
 };
 
@@ -29,7 +29,7 @@ const TeX: React.FC<KaTeXProps> = ({
   as: asComponent = "span", // 기본값 설정,
   ...props
 }) => {
-  const Component = asComponent || (block ? "div" : "span");
+  const Component: ElementType = asComponent || (block ? "div" : "span");
   // const Component = asComponent; // JSX에서 사용할 컴포넌트 지정
   const content = children ?? math;
 
