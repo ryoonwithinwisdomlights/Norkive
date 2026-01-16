@@ -580,9 +580,7 @@ summary > .notion-h {
   /* pointer-events: none; */
 }
 
-.notion-page-link:hover {
-  /*background: var(--bg-color-0);*/
-}
+
 
 .notion-page-icon {
   font-family: 'Apple Color Emoji', 'Segoe UI Emoji', NotoColorEmoji,
@@ -694,9 +692,7 @@ svg.notion-page-icon {
   height: auto !important;
 }
 
-.notion-asset-wrapper-full {
-  /* max-width: 100vw; */
-}
+
 
 .notion-asset-wrapper img {
   width: 90%;
@@ -1970,7 +1966,7 @@ PDF preview adaptation page */
   height: auto !important;
 }
 
-/* simple table设置 */
+
 table,
 thead,
 tbody {
@@ -1998,7 +1994,7 @@ pre[class*='language-mermaid'] {
   @apply bg-neutral-50 dark:bg-neutral-200 !important;
 }
 
-/* mermaid 原文隐藏 */
+/* Hide original text */
 code.language-mermaid {
   display: none;
 }
@@ -2035,11 +2031,8 @@ code.language-mermaid {
   @apply w-6 h-6 mx-3 my-2 !important;
 }
 
-/* 表格 #f5f6f8*/
-.notion-simple-table-row {
-}
 
-/* 表格头 */
+
 .notion-simple-table tr:first-child td {
   background-color: #f5f6f8;
   @apply text-center font-bold dark:bg-neutral-800 !important;
@@ -2049,7 +2042,7 @@ code.language-mermaid {
   border: 1px solid var(#eee) !important;
 }
 
-/* 竖屏视频高度bug */
+/* Vertical video height bug */
 figure.notion-asset-wrapper.notion-asset-wrapper-video > div {
   height: 100% !important;
 }
