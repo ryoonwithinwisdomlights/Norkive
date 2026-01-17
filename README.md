@@ -2,8 +2,8 @@
 
 ![RyoonGitbookLog Intro](public/images/Intro_260116.png)
 
-Notion 데이터베이스를 CMS로 사용하는 **Next.js 15 (App Router) + TypeScript** 기반 블로그/문서 스타터입니다.  
-사용자는 Notion 템플릿을 복제한 뒤, 환경변수만 설정하면 로컬 실행 및 배포가 가능합니다.
+- Notion DB를 CMS로 사용하는 **Next.js 15 (App Router) + TypeScript** 기반 블로그/문서 스타터 템플릿(starter kit).
+- Notion 템플릿을 복제한 뒤, 환경변수만 설정하면 로컬 실행 및 배포가 가능해요!
 
 
 > 레퍼런스/영감:
@@ -20,7 +20,7 @@ Notion 데이터베이스를 CMS로 사용하는 **Next.js 15 (App Router) + Typ
 
 ## Features
 
-### 핵심 구조 (프레임워크 특장점)
+### 핵심 구조 (스타터/템플릿 특장점)
 
 - **Next.js 15 최신 App Router 기반**
 - **전체 TypeScript 기반**
@@ -156,7 +156,7 @@ pnpm dev
 
 ## Configuration (`blog.config.ts`)
 
-`blog.config.ts`는 이 프레임워크의 **블로그 설정 파일**입니다.  
+`blog.config.ts`는 이 스타터/템플릿의 **블로그 설정 파일**입니다.  
 대부분의 값은 `.env.local`의 환경변수(`NEXT_PUBLIC_*`)로 **오버라이드**할 수 있고, 기본값은 `blog.config.ts`에 정의되어 있습니다.
 
 ### 대표 설정값(어디에 반영되나)

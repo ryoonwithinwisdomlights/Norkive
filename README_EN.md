@@ -2,8 +2,8 @@
 
 ![RyoonGitbookLog Intro](public/images/Intro_260116.png)
 
-A Notion database–powered blog / documentation framework built with **Next.js 15 (App Router) + TypeScript**.  
-Users can duplicate the Notion template, set a few environment variables, and run/deploy the site.
+- A Notion DB–powered blog / documentation starter template (starter kit) built with **Next.js 15 (App Router) + TypeScript**.
+- Duplicate the Notion template, set a few environment variables, and you’re ready to run/deploy.
 
 > References / inspiration:
 > - [transitive-bullshit/nextjs-notion-starter-kit](https://github.com/transitive-bullshit/nextjs-notion-starter-kit)
@@ -19,7 +19,7 @@ Users can duplicate the Notion template, set a few environment variables, and ru
 
 ## Features
 
-### Core (framework advantages)
+### Core (starter/template advantages)
 
 - **Next.js 15 App Router**
 - **TypeScript-first codebase**
@@ -153,7 +153,7 @@ See `env.example` for the full list and defaults.
 
 ## Configuration (`blog.config.ts`)
 
-`blog.config.ts` is the main **blog configuration file** for this framework.  
+`blog.config.ts` is the main **blog configuration file** for this starter template.  
 Most values can be overridden via `.env.local` (`NEXT_PUBLIC_*`), while defaults live in `blog.config.ts`.
 
 ### Key config mapping (what it changes)
