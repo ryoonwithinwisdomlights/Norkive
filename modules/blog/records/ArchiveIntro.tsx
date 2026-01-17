@@ -4,6 +4,7 @@ import { isObjectNotEmpty } from "@/lib/utils/utils";
 import { usePathname } from "next/navigation";
 import AllRecords from "./AllRecords";
 import NoRecordFound from "./NoRecordFound";
+import { BLOG } from "@/blog.config";
 
 const ArchiveIntro = () => {
   const pathname = usePathname();
@@ -27,18 +28,18 @@ const ArchiveIntro = () => {
         >
           <div className="  dark:text-neutral-300 flex flex-col  ">
             <div className="text-1xl flex flex-row justify-start ml-2 text-neutral-600 dark:text-neutral-300 ">
-              All Logs | Archived | In Notion
+             {BLOG.INTRO.sub_title}
             </div>
             <div
               className="text-5xl font-semibold text-black dark:text-white flex flex-row 
               justify-start  
         underline decoration-amber-400/30 hover:decoration-amber-300 "
             >
-              Ryoon.Gitbook.Log
+              {BLOG.INTRO.title}
               <span className="text-amber-400 "> .</span>{" "}
             </div>
             <div className="mt-2 flex flex-row justify-start text-sm text-neutral-800 font-extralight dark:text-neutral-200  ">
-              Browsing all your archives written and recorded in Notion.
+              {BLOG.INTRO.description}
             </div>
           </div>
         </div>
