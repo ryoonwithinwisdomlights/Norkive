@@ -14,16 +14,14 @@ import { PageBlockDataProps } from "@/types";
 export async function getAllRecordPageListByType({
   from,
   type,
-  dateSort = true,
 }: {
   from: string;
   type?: string;
-  dateSort?: boolean;
 }) {
   const data = await getGlobalRecordPageData({
     from,
     pageId: BLOG.NOTION_DATABASE_ID as string,
-    type: type,
+     type,
   });
 
   const resolvedData = applyDataBaseProcessing(data);
@@ -50,9 +48,9 @@ export async function getARecordPageById({
   }
 
   const props = await getSingleRecordPageData({
-    pageId: pageId,
-    from: from,
-    type: type,
+    pageId,
+   from,
+    type,
   });
 
   if (!props || !props.page) {

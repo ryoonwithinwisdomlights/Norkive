@@ -5,11 +5,12 @@
 Notion 데이터베이스를 CMS로 사용하는 **Next.js 15 (App Router) + TypeScript** 기반 블로그/문서 프레임워크입니다.  
 사용자는 Notion 템플릿을 복제한 뒤, 환경변수만 설정하면 로컬 실행 및 배포가 가능합니다.
 
+
 > 레퍼런스/영감:
 > - [transitive-bullshit/nextjs-notion-starter-kit](https://github.com/transitive-bullshit/nextjs-notion-starter-kit)
 > - [tangly1024/NotionNext](https://github.com/tangly1024/NotionNext)
->
-> 히스토리상 NotionNext(Next.js 13 Page Router 기반,전부 JS로 작성된)의 Gitbook Theme에서 출발했지만, 현재 RyoonGitbookLog는 **Next.js 15 App Router 기반 + TypeScript**로 전체 마이그레이션 및 재구성하면서 구현/구조가 크게 달라졌습니다.
+>>       - NotionNext(Next.js 13 Page Router 기반, 전부 Javascript로 작성된)의 Gitbook Theme에서 영감을 받아 출발하였습니다.
+>>       - 현재 이 오픈소스 프로젝트 RyoonGitbookLog는 **Next.js 15 App Router 기반 + TypeScript**로 전체 마이그레이션 및 재작성/재구성/발전됐습니다.
 
 ### Notion 템플릿 (복제해서 사용)
 
@@ -25,6 +26,9 @@ Notion 데이터베이스를 CMS로 사용하는 **Next.js 15 (App Router) + Typ
 - **전체 TypeScript 기반**
 - **Notion DB → 페이지 생성/렌더링** (Notion을 CMS로 사용)
 - **설정은 `blog.config.ts` + 환경변수(`env.example`) 중심**
+- **ISR(페이지 결과 캐시) + on-demand 동적 라우트 운영**: `revalidate`, `dynamicParams`, Notion DB 기반 `generateStaticParams`
+- **관측성(Observability)**: Vercel Analytics/Speed Insights + Sentry(옵션)로 Web Vitals/에러 추적 가능
+- **점진 Strict TypeScript 도입**: `tsconfig.strict.json` + `pnpm typecheck:strict`
 
 ### 콘텐츠/네비게이션
 
@@ -55,8 +59,48 @@ Notion 데이터베이스를 CMS로 사용하는 **Next.js 15 (App Router) + Typ
 ### 성능/운영
 
 - **캐시(메모리 기반)**: `ENABLE_CACHE`로 제어
+- **Redis(Upstash) + Memory fallback**: 프로덕션에서 Redis 사용, 미설정 시 메모리 캐시로 자동 폴백
 - **(Vercel) 크론 기반 캐시 갱신**: `/api/cron/update-records`
+- **ISR(revalidate) 기반 페이지 결과 캐시**: Notion fetch가 무겁더라도 라우트 결과를 캐시/재검증
+- **에러 모니터링(Sentry)**: `app/error.tsx`, `app/global-error.tsx`에서 capture (DSN 없으면 자동 비활성)
 - **번들 분석**: `pnpm bundle-report` (`ANALYZE=true`)
+
+---
+
+## 왜 이게 좋은가
+
+- **Notion을 CMS로 쓰면서도 “웹다운” 성능/UX**: `react-notion-x` 기반 렌더링 + 무거운 블록은 `next/dynamic`으로 필요할 때만 로드
+- **운영 가능한 캐시 전략**: Redis(Upstash) + Memory fallback + Cron 갱신 + ISR(페이지 결과 캐시)로 “느린 외부 데이터 소스”를 안정적으로 서비스
+- **지표 기반 개선이 가능한 기본값**: Web Vitals/에러를 “나중에 붙이는” 게 아니라, 템플릿 단계에서 관측성(옵션)을 제공
+- **코드베이스 성장에 강함**: `typecheck:strict`로 점진 strict 도입 루프를 제공해, 기능 확장 시 타입 안정성을 단계적으로 올릴 수 있음
+
+## 어떤 사람에게 추천?
+
+- Notion을 CMS로 쓰고 싶지만 **성능/SEO/운영을 코드로 통제**하고 싶은 분
+- “블로그 템플릿”을 넘어 **실서비스 운영 감각(캐시·재시도·모니터링·크론)** 이 포함된 스타터가 필요한 분
+- Next.js App Router의 **SSG/ISR/Metadata/Route handlers**를 실제 구조에서 학습/응용하고 싶은 분
+
+---
+
+## Performance & Lighthouse
+
+`react-notion-x`가 권장하듯(heavy component는 `next/dynamic`으로 지연 로드), 이 템플릿도 Notion 렌더링 영역을 **필요한 컴포넌트만 동적 로딩**하도록 구성되어 있습니다. 참고: [react-notion-x README](https://github.com/NotionX/react-notion-x/blob/master/readme.md)
+
+### Lighthouse 측정(무료)
+
+정확한 측정을 위해 **`pnpm dev`가 아니라 프로덕션 빌드(`pnpm build` + `pnpm start`)** 상태에서 실행하세요.
+
+```bash
+pnpm build
+pnpm start --port 3000
+
+# HTML 리포트 생성 (Desktop)
+npx lighthouse http://localhost:3000 \
+  --preset=desktop \
+  --only-categories=performance,accessibility,best-practices,seo \
+  --output=html \
+  --output-path=./lighthouse-home.html
+```
 
 ---
 
@@ -171,6 +215,8 @@ pnpm dev
 - `pnpm dev`: 로컬 개발 서버
 - `pnpm build`: 프로덕션 빌드
 - `pnpm start`: 빌드 후 실행
+- `pnpm typecheck`: 타입 체크
+- `pnpm typecheck:strict`: 점진 strict 타입 체크(마이그레이션용)
 - `pnpm lint`: 린트(현재는 경고 허용 / 에러만 실패)
 - `pnpm prettier:check`: 포맷 체크
 - `pnpm bundle-report`: 번들 분석 빌드(`ANALYZE=true`)

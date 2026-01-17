@@ -8,8 +8,8 @@ Users can duplicate the Notion template, set a few environment variables, and ru
 > References / inspiration:
 > - [transitive-bullshit/nextjs-notion-starter-kit](https://github.com/transitive-bullshit/nextjs-notion-starter-kit)
 > - [tangly1024/NotionNext](https://github.com/tangly1024/NotionNext)
->
-> Historically, this project started from the Gitbook theme direction of NotionNext (Next.js 13 Page Router, written in JavaScript), but RyoonGitbookLog has been rebuilt around **Next.js 15 App Router + TypeScript**, so the current structure/implementation is significantly different.
+>>       - Inspired by the Gitbook Theme of NotionNext (based on Next.js 13 Page Router and written entirely in Javascript). 
+>>       - Currently, this open source project, RyoonGitbookLog, has been fully migrated and rewritten/restructured/evolved to **Next.js 15 App Router-based + TypeScript**.
 
 ## Notion template (duplicate & use)
 
@@ -25,6 +25,9 @@ Users can duplicate the Notion template, set a few environment variables, and ru
 - **TypeScript-first codebase**
 - **Notion DB → page generation / rendering** (Notion as CMS)
 - Configuration via `blog.config.ts` + environment variables (`env.example`)
+- **ISR (route segment caching) + on-demand dynamic routes**: `revalidate`, `dynamicParams`, Notion DB-derived `generateStaticParams`
+- **Observability**: Vercel Analytics/Speed Insights + Sentry (optional) for Web Vitals and runtime errors
+- **Gradual Strict TypeScript adoption**: `tsconfig.strict.json` + `pnpm typecheck:strict`
 
 ### Content & navigation
 
@@ -55,8 +58,47 @@ Users can duplicate the Notion template, set a few environment variables, and ru
 ### Performance / operations
 
 - Memory cache controlled by `ENABLE_CACHE`
+- Redis (Upstash) + memory fallback: use Redis in prod when configured, otherwise auto-fallback to memory
 - (Vercel) cron-based cache refresh: `/api/cron/update-records`
+- ISR via `revalidate` for route segment caching
+- Error monitoring (Sentry): capture in `app/error.tsx` and `app/global-error.tsx` (no-op when DSN missing)
 - Bundle analyzer: `pnpm bundle-report` (`ANALYZE=true`)
+
+---
+
+## Why this template
+
+- **Notion as CMS, but still “web-fast”**: `react-notion-x` rendering with heavyweight blocks loaded only when needed via `next/dynamic`
+- **Ops-friendly caching by default**: Redis (Upstash) + memory fallback + cron refresh + ISR (route segment caching) for stability against slow/unstable upstreams
+- **Metrics-ready**: optional observability (Web Vitals + error capture) is built into the template instead of being an afterthought
+- **Scales with your codebase**: `typecheck:strict` enables gradual strict-mode adoption as the project grows
+
+## Who is this for?
+
+- People who want Notion as a CMS but still want to **control performance/SEO/ops with code**
+- Anyone who wants a starter that includes **real-world ops basics** (cache, retries, monitoring, cron refresh)
+- Developers who want to learn/apply App Router features like **SSG/ISR/Metadata/Route handlers** in a practical structure
+
+---
+
+## Performance & Lighthouse
+
+Following the `react-notion-x` guidance (lazy-load heavyweight blocks via `next/dynamic`), this template keeps the initial bundle lean by enabling optional Notion blocks only when needed. Reference: [react-notion-x README](https://github.com/NotionX/react-notion-x/blob/master/readme.md)
+
+### Lighthouse (free)
+
+For meaningful results, run Lighthouse against a **production build** (`pnpm build` + `pnpm start`), not `pnpm dev`.
+
+```bash
+pnpm build
+pnpm start --port 3000
+
+npx lighthouse http://localhost:3000 \
+  --preset=desktop \
+  --only-categories=performance,accessibility,best-practices,seo \
+  --output=html \
+  --output-path=./lighthouse-home.html
+```
 
 ---
 
@@ -170,6 +212,8 @@ To enable comments, set:
 - `pnpm dev`: start dev server
 - `pnpm build`: production build
 - `pnpm start`: run production server after build
+- `pnpm typecheck`: TypeScript typecheck
+- `pnpm typecheck:strict`: strict typecheck (for gradual migration)
 - `pnpm lint`: lint (warnings allowed; errors fail)
 - `pnpm prettier:check`: formatting check
 - `pnpm bundle-report`: build with bundle analyzer (`ANALYZE=true`)

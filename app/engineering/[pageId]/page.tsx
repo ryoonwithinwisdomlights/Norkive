@@ -61,7 +61,7 @@ export default async function Page({
     return <div>Invalid Page Id</div>;
   }
 
-  // console.log("result:::", result.page);
+
 
   return (
     <GeneralRecordTypePageWrapper>
