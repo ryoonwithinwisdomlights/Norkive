@@ -1,6 +1,7 @@
 # 📚 RyoonGitbookLog
 
-![RyoonGitbookLog Intro](public/images/Intro_260116.png)
+![RyoonGitbookLog Intro](public/images/intro_white.png)
+![RyoonGitbookLog Intro](public/images/intro_dark.png)
 
 - A Notion DB–powered blog / documentation starter template (starter kit) built with **Next.js 15 (App Router) + TypeScript**.
 - Duplicate the Notion template, set a few environment variables, and you’re ready to run/deploy.
