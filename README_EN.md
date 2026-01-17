@@ -1,25 +1,25 @@
-# RyoonGitbookLog
+# 📚 RyoonGitbookLog
 
 ![RyoonGitbookLog Intro](public/images/Intro_260116.png)
 
 - A Notion DB–powered blog / documentation starter template (starter kit) built with **Next.js 15 (App Router) + TypeScript**.
 - Duplicate the Notion template, set a few environment variables, and you’re ready to run/deploy.
 
-### References / inspiration:
+### 🔖 References / inspiration:
 > - [transitive-bullshit/nextjs-notion-starter-kit](https://github.com/transitive-bullshit/nextjs-notion-starter-kit)
 > - [tangly1024/NotionNext](https://github.com/tangly1024/NotionNext)
     - Inspired by the Gitbook Theme of NotionNext (based on Next.js 13 Page Router and written entirely in Javascript). 
     - Currently, this open source project, RyoonGitbookLog, has been fully migrated and rewritten/restructured/evolved to **Next.js 15 App Router-based + TypeScript**.
 
-## Notion template (duplicate & use)
+## 🧩 Notion template (duplicate & use)
 
 - Template: [Notion Blog Template](https://ryoonwithwisdomtrees.notion.site/2ea1eb5c033780349f3fc73c9160c4f6?v=2ea1eb5c03378122a3ba000c8cf252d1&source=copy_link)
 
 ---
 
-## Features
+## ✨ Features
 
-### Core (starter/template advantages)
+### 🧱 Core (starter/template advantages)
 
 - **Next.js 15 App Router**
 - **TypeScript-first codebase**
@@ -29,7 +29,7 @@
 - **Observability**: Vercel Analytics/Speed Insights + Sentry (optional) for Web Vitals and runtime errors
 - **Gradual Strict TypeScript adoption**: `tsconfig.strict.json` + `pnpm typecheck:strict`
 
-### Content & navigation
+### 🧭 Content & navigation
 
 - Post(record)-type routes: `general`, `project`, `engineering`, `archive`
 - Category & tag pages: `/category`, `/tag`
@@ -37,7 +37,7 @@
 - Header search: fuzzy search via `fuse.js`
 - Table of contents (scroll spy): highlight current section on scroll
 
-### Rendering / markup
+### 📝 Rendering / markup
 
 - Notion rendering via `react-notion-x`
 - Code highlighting (Prism) + theme switching options
@@ -47,7 +47,7 @@
   - lazy placeholder
   - zoom-in support
 
-### UX / interaction
+### 🎛️ UX / interaction
 
 - Dark mode (appearance setting / persisted)
 - i18n: locale initialization via `NEXT_PUBLIC_LANG` + language switch UI
@@ -55,7 +55,7 @@
 - Share bar / share buttons via `react-share`
 - Optional comments via Giscus
 
-### Performance / operations
+### 🚀 Performance / operations
 
 - Memory cache controlled by `ENABLE_CACHE`
 - Redis (Upstash) + memory fallback: use Redis in prod when configured, otherwise auto-fallback to memory
@@ -66,14 +66,14 @@
 
 ---
 
-## Why this template
+## 🤔 Why this template
 
 - **Notion as CMS, but still “web-fast”**: `react-notion-x` rendering with heavyweight blocks loaded only when needed via `next/dynamic`
 - **Ops-friendly caching by default**: Redis (Upstash) + memory fallback + cron refresh + ISR (route segment caching) for stability against slow/unstable upstreams
 - **Metrics-ready**: optional observability (Web Vitals + error capture) is built into the template instead of being an afterthought
 - **Scales with your codebase**: `typecheck:strict` enables gradual strict-mode adoption as the project grows
 
-## Who is this for?
+## 🎯 Who is this for?
 
 - People who want Notion as a CMS but still want to **control performance/SEO/ops with code**
 - Anyone who wants a starter that includes **real-world ops basics** (cache, retries, monitoring, cron refresh)
@@ -81,7 +81,7 @@
 
 ---
 
-## Performance & Lighthouse
+## 📈 Performance & Lighthouse
 
 This template keeps initial load fast even with Notion rendering by applying:
 
@@ -93,7 +93,7 @@ This template keeps initial load fast even with Notion rendering by applying:
 
 Reference: `react-notion-x` recommends lazy-loading heavyweight blocks via `next/dynamic` — [react-notion-x README](https://github.com/NotionX/react-notion-x/blob/master/readme.md)
 
-### Lighthouse (free)
+### 🧪 Lighthouse (free)
 
 For meaningful results, run Lighthouse against a **production build**, not `pnpm dev`.  
 This project uses `output: "standalone"`, so the closest “real” runtime is:
@@ -113,21 +113,31 @@ npx lighthouse http://localhost:3000 \
 
 ---
 
-## Quick start
+## 🏁 Getting Started
 
-### Prerequisites
+This template is designed to be run with just: “Duplicate the Notion template → set env vars → run”.
 
+### ✅ Prerequisites
 - Node.js: `>= 22.18.0` (see `package.json#engines`)
 - pnpm: `corepack enable`
 
-### 1) Install
+### 🧬 1) Fork/Clone
+
+You can fork this repo, or just clone it:
+
+```bash
+git clone https://github.com/ryoonwithinwisdomlights/ryoongitbooklog.git
+cd ryoongitbooklog
+```
+
+### 📦 2) Install
 
 ```bash
 corepack enable
 pnpm install
 ```
 
-### 2) Configure environment variables
+### 🔐 3) Configure environment variables
 
 This repo provides `env.example` (instead of `.env.example`).
 
@@ -136,11 +146,10 @@ cp env.example .env.local
 ```
 
 Minimum required value:
-
 - **`NOTION_DATABASE_ID`**: your Notion database page ID  
   (multiple IDs supported as `id1,id2`)
 
-### 3) Run
+### 🧑‍💻 4) Run (dev)
 
 ```bash
 pnpm dev
@@ -148,9 +157,18 @@ pnpm dev
 
 Open `http://localhost:3000`.
 
+### 🚢 5) Run (production / standalone recommended)
+
+For production-like runtime (and meaningful Lighthouse results), run the standalone server:
+
+```bash
+pnpm run build
+PORT=3000 node .next/standalone/server.js
+```
+
 ---
 
-## Notion setup
+## 🗂️ Notion setup
 
 1. **Duplicate** the Notion template.
 2. Extract the page ID from the duplicated Notion DB page URL and set it to `NOTION_DATABASE_ID`.
@@ -158,16 +176,16 @@ Open `http://localhost:3000`.
 
 ---
 
-## Environment variables
+## 🔐 Environment variables
 
 See `env.example` for the full list and defaults.
 
-## Configuration (`blog.config.ts`)
+## ⚙️ Configuration (`blog.config.ts`)
 
 `blog.config.ts` is the main **blog configuration file** for this starter template.  
 Most values can be overridden via `.env.local` (`NEXT_PUBLIC_*`), while defaults live in `blog.config.ts`.
 
-### Key config mapping (what it changes)
+### 🧾 Key config mapping (what it changes)
 
 | Setting | `BLOG` key(s) | Recommended env var | Where it affects (examples) |
 | --- | --- | --- | --- |
@@ -180,20 +198,20 @@ Most values can be overridden via `.env.local` (`NEXT_PUBLIC_*`), while defaults
 | Default language (i18n) | `LANG` | `NEXT_PUBLIC_LANG` | Locale init and UI strings / language switch |
 | Theme (light/dark) | `APPEARANCE`, `APPEARANCE_DARK_TIME` | `NEXT_PUBLIC_APPEARANCE`, `NEXT_PUBLIC_APPEARANCE_DARK_TIME` | Dark mode defaults / auto switch |
 
-### Required
+### ⭐ Required
 
 - `NOTION_DATABASE_ID`
 
-### Optional (feature toggles)
+### 🧩 Optional (feature toggles)
 
 - `ENABLE_CACHE`: enable cache
 - `ANALYZE`: bundle analysis (`pnpm bundle-report`)
 
-### i18n
+### 🌐 i18n
 
 - `NEXT_PUBLIC_LANG`: default locale (e.g. `kr-KR`, `en-US`)
 
-### Comments (Giscus)
+### 💬 Comments (Giscus)
 
 To enable comments, set:
 
@@ -205,7 +223,7 @@ To enable comments, set:
 
 ---
 
-## URL paths
+## 🧵 URL paths
 
 - Record pages:
   - `/general/[pageId]`
@@ -218,7 +236,7 @@ To enable comments, set:
 
 ---
 
-## Scripts
+## 🧰 Scripts
 
 - `pnpm dev`: start dev server
 - `pnpm build`: production build
@@ -231,7 +249,7 @@ To enable comments, set:
 
 ---
 
-## Deployment (Vercel)
+## ☁️ Deployment (Vercel)
 
 - `vercel.json` config includes a cron calling:
   - `/api/cron/update-records`
@@ -239,21 +257,21 @@ To enable comments, set:
 
 ---
 
-## CI
+## 🧯 CI
 
 CI is intentionally **disabled** for the initial OSS release.  
 See `docs/ci.md` to enable it later.
 
 ---
 
-## Contributing / Security
+## 🤝 Contributing / Security
 
 - Contributing: `CONTRIBUTING.md`
 - Security: `SECURITY.md`
 
 ---
 
-## License
+## 📄 License
 
 MIT License. See `LICENSE`.
 

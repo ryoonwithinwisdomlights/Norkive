@@ -23,8 +23,7 @@ const ArchiveIntro = () => {
     >
       <div className="flex flex-col w-full items-center  pt-4  ">
         <div
-          className="
-        flex flex-col   break-words overflow "
+          className="flex flex-col break-words overflow "
         >
           <div className="  dark:text-neutral-300 flex flex-col  ">
             <div className="text-1xl flex flex-row justify-start ml-2 text-neutral-600 dark:text-neutral-300 ">
@@ -35,7 +34,7 @@ const ArchiveIntro = () => {
               justify-start  
         underline decoration-amber-400/30 hover:decoration-amber-300 "
             >
-              RyoonGitbookLog
+              Ryoon.Gitbook.Log
               <span className="text-amber-400 "> .</span>{" "}
             </div>
             <div className="mt-2 flex flex-row justify-start text-sm text-neutral-800 font-extralight dark:text-neutral-200  ">
