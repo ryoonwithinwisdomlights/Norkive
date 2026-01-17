@@ -1,16 +1,16 @@
 const CORE_BLOG_CONFIG = {
   // Basic site metadata
-  APP_NAME: "RyoonGitbookLog", //사이트 이름에요
-  AUTHOR: process.env.NEXT_PUBLIC_AUTHOR || "your name",
+  APP_NAME: "RyoonGitbookLog", // 사이트 이름을 바꿔주세요.
+  AUTHOR: process.env.NEXT_PUBLIC_AUTHOR || "ryoonwithinwisdomlights", // 사이트 저자 이름을 바꿔주세요.
   BIO: process.env.NEXT_PUBLIC_BIO ||
-      "your bio",//우측에 나타나는 소개문구에요
-  TITLE: process.env.NEXT_PUBLIC_TITLE || "your site title", // 사이트 메타 타이틀에요
+      "A Software Engineer who likes to Giveaway to the World with Joy, Love and Lights.",//우측에 나타나는 Bio(소개문구)입니다. 이 부분을 바꿔주세요.
+  TITLE: process.env.NEXT_PUBLIC_TITLE || "Ryoon.Gitbook.Log", // 사이트 메타 타이틀입니다. 이 부분을 바꿔주세요.
   DESCRIPTION: process.env.NEXT_PUBLIC_DESCRIPTION ||
-    "your description",//메타 설명에요
+    "Ryoon.Gitbook.Log - A Static WebBlog for your every Recorded Archive in Notion with Next.js 15",//메타 설명입니다. 이 부분을 바꿔주세요.
   LINK: process.env.NEXT_PUBLIC_LINK || "https://ryoongitbooklog.vercel.app/", // 사이트 링크를 교체해주세요.
-  KEYWORDS: //메타 키워드에요
+  KEYWORDS: 
     process.env.NEXT_PUBLIC_KEYWORD ||
-    "Keywords를 바꿔주세요.",
+    "Ryoon.Gitbook.Log, Gitbook Themed-Static Website, with Notion API",//메타 키워드입니다. 이 부분을 바꿔주세요.
 INTRO:{
     sub_title: process.env.NEXT_PUBLIC_INTRO_SUB_TITLE || "✨ Welcome to",// 자유롭게 커스터마이징 해주세요.
     title: process.env.NEXT_PUBLIC_INTRO_TITLE || "Ryoon.Gitbook.Log",// 자유롭게 커스터마이징 해주세요.
