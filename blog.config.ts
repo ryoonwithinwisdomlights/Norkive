@@ -1,14 +1,12 @@
 const CORE_BLOG_CONFIG = {
   // Basic site metadata
   APP_NAME: "RyoonGitbookLog", //사이트 이름에요
-    AUTHOR: process.env.NEXT_PUBLIC_AUTHOR || "이름을 바꿔주세요.",
-    BIO: //우측에 나타나는 소개문구에요
-      process.env.NEXT_PUBLIC_BIO ||
-      "소개문구를 바꿔주세요.",
-  TITLE: process.env.NEXT_PUBLIC_TITLE || "사이트 메타 타이틀을 바꿔주세요.", // 사이트 메타 타이틀에요
-  DESCRIPTION: //메타 설명에요
-    process.env.NEXT_PUBLIC_DESCRIPTION ||
-    "Description을 바꿔주세요.",
+  AUTHOR: process.env.NEXT_PUBLIC_AUTHOR || "your name",
+  BIO: process.env.NEXT_PUBLIC_BIO ||
+      "your bio",//우측에 나타나는 소개문구에요
+  TITLE: process.env.NEXT_PUBLIC_TITLE || "your site title", // 사이트 메타 타이틀에요
+  DESCRIPTION: process.env.NEXT_PUBLIC_DESCRIPTION ||
+    "your description",//메타 설명에요
   LINK: process.env.NEXT_PUBLIC_LINK || "https://ryoongitbooklog.vercel.app/", // 사이트 링크를 교체해주세요.
   KEYWORDS: //메타 키워드에요
     process.env.NEXT_PUBLIC_KEYWORD ||
