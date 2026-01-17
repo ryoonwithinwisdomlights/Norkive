@@ -4,15 +4,15 @@ const CORE_BLOG_CONFIG = {
     AUTHOR: process.env.NEXT_PUBLIC_AUTHOR || "이름을 바꿔주세요.",
     BIO: //우측에 나타나는 소개문구에요
       process.env.NEXT_PUBLIC_BIO ||
-      "소개문구를 바꿔주세요. 기본 소개문구는 A Software Engineer who likes to Giveaway to the World with Joy, Love and Lights. 입니다.",
+      "소개문구를 바꿔주세요.",
   TITLE: process.env.NEXT_PUBLIC_TITLE || "사이트 메타 타이틀을 바꿔주세요.", // 사이트 메타 타이틀에요
   DESCRIPTION: //메타 설명에요
     process.env.NEXT_PUBLIC_DESCRIPTION ||
-    "Description을 바꿔주세요. 기본 설명은 A Static WebBlog for your every Recorded Archive in Notion with Next.js 15 입니다.",
-  LINK: process.env.NEXT_PUBLIC_LINK || "https://ryoongitbooklog.vercel.app/",
+    "Description을 바꿔주세요.",
+  LINK: process.env.NEXT_PUBLIC_LINK || "https://ryoongitbooklog.vercel.app/", // 사이트 링크를 교체해주세요.
   KEYWORDS: //메타 키워드에요
     process.env.NEXT_PUBLIC_KEYWORD ||
-    "Keywords를 바꿔주세요. 기본 키워드는 RyoonGitbookLog, Gitbook Themed-Static Website, with Notion API 입니다.",
+    "Keywords를 바꿔주세요.",
 INTRO:{
     sub_title: process.env.NEXT_PUBLIC_INTRO_SUB_TITLE || "✨ Welcome to",// 자유롭게 커스터마이징 해주세요.
     title: process.env.NEXT_PUBLIC_INTRO_TITLE || "Ryoon.Gitbook.Log",// 자유롭게 커스터마이징 해주세요.
