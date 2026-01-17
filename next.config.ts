@@ -1,8 +1,9 @@
 import type { NextConfig } from "next";
 import { BLOG } from "./blog.config";
-const path = require("path");
+import path from "path";
+import bundleAnalyzer from "@next/bundle-analyzer";
 
-const withBundleAnalyzer = require("@next/bundle-analyzer")({
+const withBundleAnalyzer = bundleAnalyzer({
   enabled: BLOG.BUNDLE_ANALYZER,
 });
 
@@ -87,7 +88,7 @@ const nextConfig: NextConfig = {
       },
     ];
   },
-  webpack: (config, { dev, isServer }) => {
+  webpack: (config, { dev: _dev, isServer }) => {
     config.resolve.alias["@"] = path.resolve(__dirname);
     if (process.env.NODE_ENV_API === "development") {
       config.devtool = "source-map";
@@ -110,4 +111,4 @@ const nextConfig: NextConfig = {
   },
 };
 
-module.exports = withBundleAnalyzer(nextConfig);
+export default withBundleAnalyzer(nextConfig);

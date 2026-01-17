@@ -163,7 +163,7 @@ const CORE_BLOG_CONFIG = {
     process.env.npm_lifecycle_event === "build" ||
     process.env.npm_lifecycle_event === "export",
   isProd: process.env.NEXT_VERCEL_ENV === "production",
-  BUNDLE_ANALYZER: process.env.ANALYZE === "true" || false,
+  BUNDLE_ANALYZER: process.env.ANALYZE === "false",
 };
 
 /**
