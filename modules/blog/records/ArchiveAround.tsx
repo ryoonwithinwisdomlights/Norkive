@@ -1,5 +1,5 @@
 "use client";
-import React, { memo } from "react";
+import React, { memo, useCallback } from "react";
 import { substringWithNumberDots } from "@/lib/utils/utils";
 import {
   ChevronLeft,
@@ -21,19 +21,24 @@ interface ArchiveAroundProps {
  * @returns
  */
 const ArchiveAround = memo(function ArchiveAround({ prev, next }: ArchiveAroundProps) {
+  const router = useRouter();
+
+  const handlePrevClick = useCallback(() => {
+    if (prev?.slug) router.push(`/${prev.slug}`);
+  }, [router, prev?.slug]);
+
+  const handleNextClick = useCallback(() => {
+    if (next?.slug) router.push(`/${next.slug}`);
+  }, [router, next?.slug]);
+
   if (!prev || !next) {
     return <></>;
   }
-  const router = useRouter();
-  const onClick = (slug: string) => {
-    router.push(`/${slug}`);
-  };
+
   return (
     <section className="w-full rounded-2xl flex bg-neutral-100 dark:bg-neutral-800 p-1 text-sm ">
       <div
-        onClick={(e) => {
-          onClick(prev.slug);
-        }}
+        onClick={handlePrevClick}
         className="group flex items-center justify-between pl-3 pr-6 space-x-1.5"
       >
         <ChevronLeft className="w-6 h-6  text-neutral-300 dark:text-neutral-700 group-hover:text-neutral-600 dark:group-hover:text-neutral-400" />
@@ -43,9 +48,7 @@ const ArchiveAround = memo(function ArchiveAround({ prev, next }: ArchiveAroundP
         </span>
       </div>
       <div
-        onClick={(e) => {
-          onClick(next.slug);
-        }}
+        onClick={handleNextClick}
         className="group w-full "
       >
         <div className=" bg-white dark:bg-neutral-700 flex-1 flex items-center justify-end h-16 hover:ring-1 hover:ring-neutral-200 dark:hover:ring-neutral-800 rounded-xl">

@@ -1,34 +1,19 @@
 "use client";
-import { useGlobal } from "@/lib/context/EssentialNavInfoProvider";
 import throttle from "lodash.throttle";
 import { uuidToId } from "notion-utils";
-import { useCallback, useEffect, useState } from "react";
-import { useMediaQuery } from "usehooks-ts";
-import { isBrowser } from "react-notion-x";
+import { useCallback, useEffect, useMemo, useState } from "react";
+
 /**
  * @param toc
  * @returns {JSX.Element}
  * @constructor
  */
 const Catalog = ({ page }) => {
-  const toc = page?.tableOfContents;
-
-  if (toc.length < 1) {
-    return null;
-  }
-
-  // Synchronize selected directory events
   const [activeSection, setActiveSection] = useState(null);
 
-  const isMobile = useMediaQuery("(max-width: 768px");
-  // listen for scroll events
-  useEffect(() => {
-    window.addEventListener("scroll", actionSectionScrollSpy);
-    actionSectionScrollSpy();
-    return () => {
-      window.removeEventListener("scroll", actionSectionScrollSpy);
-    };
-  }, [page]);
+  // Memoize toc and tocIds to avoid recalculation on every render
+  const toc = useMemo(() => page?.tableOfContents || [], [page?.tableOfContents]);
+  const tocIds = useMemo(() => toc.map((t) => uuidToId(t.id)), [toc]);
 
   const throttleMs = 200;
   const actionSectionScrollSpy = useCallback(
@@ -45,19 +30,16 @@ const Catalog = ({ page }) => {
         const bbox = section.getBoundingClientRect();
         const prevHeight = prevBBox ? bbox.top - prevBBox.bottom : 0;
         const offset = Math.max(150, prevHeight / 4);
-        // GetBoundingClientRect returns values relative to viewport
         if (bbox.top - offset < 0) {
           currentSectionId = section.getAttribute("data-id");
           prevBBox = bbox;
           continue;
         }
-        // No need to continue loop, if last element has been detected
         break;
       }
       setActiveSection(currentSectionId);
-      const tocIds = page?.tableOfContents?.map((t) => uuidToId(t.id)) || [];
       const index = tocIds.indexOf(currentSectionId) || 0;
-      if (tocIds?.length > 0) {
+      if (tocIds.length > 0) {
         for (const tocWrapper of document?.getElementsByClassName(
           "toc-wrapper-mobile"
         )) {
@@ -65,8 +47,20 @@ const Catalog = ({ page }) => {
         }
       }
     }, throttleMs),
-    [page]
+    [tocIds]
   );
+
+  useEffect(() => {
+    window.addEventListener("scroll", actionSectionScrollSpy);
+    actionSectionScrollSpy();
+    return () => {
+      window.removeEventListener("scroll", actionSectionScrollSpy);
+    };
+  }, [actionSectionScrollSpy]);
+
+  if (toc.length < 1) {
+    return null;
+  }
 
   return (
     <div

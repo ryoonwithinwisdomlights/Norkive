@@ -1,5 +1,5 @@
 "use client";
-import React, { memo, useEffect, useState } from "react";
+import React, { memo, useCallback, useEffect, useState } from "react";
 import { useGeneralSiteSettings } from "@/lib/context/GeneralSiteSettingsProvider";
 import { MoveLeftIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
@@ -17,9 +17,10 @@ import { useRouter } from "next/navigation";
 const JumpToBackButton = memo(function JumpToBackButton() {
   const router = useRouter();
   const { locale } = useGeneralSiteSettings();
-  const handleBack = () => {
+
+  const handleBack = useCallback(() => {
     router.back();
-  };
+  }, [router]);
 
   const [isMounted, setIsMounted] = useState(false);
 

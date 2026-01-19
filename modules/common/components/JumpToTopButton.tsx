@@ -1,5 +1,5 @@
 "use client";
-import React, { memo } from "react";
+import React, { memo, useCallback } from "react";
 import { ChevronUpIcon, CornerLeftUp } from "lucide-react";
 
 /**
@@ -11,14 +11,14 @@ import { ChevronUpIcon, CornerLeftUp } from "lucide-react";
  * @constructor
  */
 const JumpToTopButton = memo(function JumpToTopButton() {
-  const handleScrollToTop = () => {
-    const targetContainer = document.getElementById("main-scroll-container"); //
+  const handleScrollToTop = useCallback(() => {
+    const targetContainer = document.getElementById("main-scroll-container");
     if (targetContainer) {
       targetContainer.scrollTo({ top: 0, behavior: "smooth" });
     } else {
       console.warn("Scroll container not found!");
     }
-  };
+  }, []);
   return (
     <div
       id="jump-to-top"

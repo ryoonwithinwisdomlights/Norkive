@@ -1,5 +1,5 @@
 "use client";
-import React, { memo, useState } from "react";
+import React, { memo, useCallback, useState } from "react";
 import { BLOG } from "@/blog.config";
 import AllRecordsPostCard from "@/modules/blog/records/AllRecordsPostCard";
 import Collapse from "@/modules/common/components/shared/Collapse";
@@ -25,9 +25,10 @@ interface NavPostItemProps {
 const NavPostItem = memo(function NavPostItem({ group, onHeightChange }: NavPostItemProps) {
   const pathname = usePathname();
   const [isOpen, changeIsOpen] = useState(group?.selected);
-  const toggleOpenSubMenu = () => {
-    changeIsOpen(!isOpen);
-  };
+
+  const toggleOpenSubMenu = useCallback(() => {
+    changeIsOpen((prev) => !prev);
+  }, []);
 
   if (group?.category) {
     return (

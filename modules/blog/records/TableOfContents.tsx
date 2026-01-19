@@ -1,44 +1,14 @@
 "use client";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { uuidToId } from "notion-utils";
 import throttle from "lodash.throttle";
-import { isBrowser } from "react-notion-x";
 
 const TableOfContents = ({ page }) => {
-  if (!page) {
-    return null;
-  } else if (page?.tableOfContents?.length === 0) {
-    return null;
-  }
-
-  const toc = page.tableOfContents;
-  // Synchronize selected directory events
   const [activeSection, setActiveSection] = useState(null);
 
-  // listen for scroll events
-  useEffect(() => {
-    window.addEventListener("scroll", actionSectionScrollSpy);
-    actionSectionScrollSpy();
-    return () => {
-      window.removeEventListener("scroll", actionSectionScrollSpy);
-    };
-  }, [page]);
-
-  function scrollTo(id) {
-    id = id.replaceAll("-", "");
-    const target = document.querySelector(`.notion-block-${id}`);
-    if (!target) return;
-    // `65` is the height of expanded nav
-    // TODO: Remove the magic number
-    const top =
-      document.documentElement.scrollTop +
-      target.getBoundingClientRect().top -
-      65;
-    document.documentElement.scrollTo({
-      top,
-      behavior: "smooth",
-    });
-  }
+  // Memoize toc and tocIds to avoid recalculation on every render
+  const toc = useMemo(() => page?.tableOfContents || [], [page?.tableOfContents]);
+  const tocIds = useMemo(() => toc.map((t) => uuidToId(t.id)), [toc]);
 
   const throttleMs = 200;
   const actionSectionScrollSpy = useCallback(
@@ -55,19 +25,16 @@ const TableOfContents = ({ page }) => {
         const bbox = section.getBoundingClientRect();
         const prevHeight = prevBBox ? bbox.top - prevBBox.bottom : 0;
         const offset = Math.max(150, prevHeight / 4);
-        // GetBoundingClientRect returns values relative to viewport
         if (bbox.top - offset < 0) {
           currentSectionId = section.getAttribute("data-id");
           prevBBox = bbox;
           continue;
         }
-        // No need to continue loop, if last element has been detected
         break;
       }
       setActiveSection(currentSectionId);
-      const tocIds = page?.tableOfContents?.map((t) => uuidToId(t.id)) || [];
       const index = tocIds.indexOf(currentSectionId) || 0;
-      if (tocIds?.length > 0) {
+      if (tocIds.length > 0) {
         for (const tocWrapper of document?.getElementsByClassName(
           "toc-wrapper-pc"
         )) {
@@ -75,10 +42,19 @@ const TableOfContents = ({ page }) => {
         }
       }
     }, throttleMs),
-    [page]
+    [tocIds]
   );
-  if (!toc || toc?.length < 1) {
-    return <></>;
+
+  useEffect(() => {
+    window.addEventListener("scroll", actionSectionScrollSpy);
+    actionSectionScrollSpy();
+    return () => {
+      window.removeEventListener("scroll", actionSectionScrollSpy);
+    };
+  }, [actionSectionScrollSpy]);
+
+  if (!page || toc.length === 0) {
+    return null;
   }
 
   return (

@@ -1,10 +1,12 @@
 "use client";
+import { useMemo } from "react";
 import { useGeneralSiteSettings } from "@/lib/context/GeneralSiteSettingsProvider";
 import { ARCHIVE_CONFIG } from "@/lib/utils/archive-config";
 import NoRecordFound from "@/modules/blog/records/NoRecordFound";
 import NavPostItem from "@/modules/layout/components/NavPostItem";
 import NavPostListEmpty from "@/modules/layout/components/NavPostListEmpty";
 import { usePathname } from "next/navigation";
+
 /**
  * Blog list scrolling paging
  * @param records All articles
@@ -14,70 +16,74 @@ import { usePathname } from "next/navigation";
  */
 const NavPostList = (props) => {
   const { searchKeyword, filteredNavPages } = useGeneralSiteSettings();
-  if (filteredNavPages !== undefined) {
-    if (filteredNavPages.length < 0) {
-      return <NoRecordFound />;
-    }
-  }
-
   const pathname = usePathname();
-  let selectedSth = false;
-  const groupedArray = filteredNavPages?.reduce((groups: any, item: any) => {
-    const categoryName = item?.category ? item?.category : ""; // Convert category to string
 
-    let existingGroup: any = null;
-    // Turn on automatic group sorting
-    if (JSON.parse(ARCHIVE_CONFIG.AUTO_SORT.toString())) {
-      existingGroup = groups.find(
-        (group: any) => group.category === categoryName
-      ); // Search for the last group with the same name
-    } else {
-      existingGroup = groups[groups.length - 1]; // Get the last group
+  // Memoize expensive grouping calculation
+  const groupedArray = useMemo(() => {
+    if (!filteredNavPages || filteredNavPages.length === 0) {
+      return null;
     }
 
-    // adding data
-    if (existingGroup && existingGroup.category === categoryName) {
-      existingGroup.items.push(item);
-    } else {
-      groups.push({ category: categoryName, items: [item] });
-    }
-    return groups;
-  }, []);
+    const groups = filteredNavPages.reduce((acc: any, item: any) => {
+      const categoryName = item?.category ? item?.category : "";
 
-  // Handle whether selected
-  groupedArray?.map((group) => {
-    let groupSelected = false;
-    for (const record of group?.items) {
-      if (pathname.split("?")[0] === "/" + record.slug) {
-        groupSelected = true;
-        selectedSth = true;
+      let existingGroup: any = null;
+      if (JSON.parse(ARCHIVE_CONFIG.AUTO_SORT.toString())) {
+        existingGroup = acc.find(
+          (group: any) => group.category === categoryName
+        );
+      } else {
+        existingGroup = acc[acc.length - 1];
       }
-    }
-    group.selected = groupSelected;
-    return null;
-  });
 
-  // If none are selected, the first one will be opened by default.
-  if (!selectedSth && groupedArray && groupedArray?.length > 0) {
-    groupedArray[0].selected = true;
+      if (existingGroup && existingGroup.category === categoryName) {
+        existingGroup.items.push(item);
+      } else {
+        acc.push({ category: categoryName, items: [item] });
+      }
+      return acc;
+    }, []);
+
+    // Handle selection
+    let selectedSth = false;
+    groups.forEach((group) => {
+      let groupSelected = false;
+      for (const record of group?.items) {
+        if (pathname.split("?")[0] === "/" + record.slug) {
+          groupSelected = true;
+          selectedSth = true;
+        }
+      }
+      group.selected = groupSelected;
+    });
+
+    // If none selected, open first by default
+    if (!selectedSth && groups.length > 0) {
+      groups[0].selected = true;
+    }
+
+    return groups;
+  }, [filteredNavPages, pathname]);
+
+  if (filteredNavPages !== undefined && filteredNavPages.length < 0) {
+    return <NoRecordFound />;
   }
 
   if (!groupedArray || groupedArray.length === 0) {
     return <NavPostListEmpty searchKeyword={searchKeyword} />;
-  } else {
-    return (
-      <div id="records-wrapper" className="flex-grow w-full h-full ">
-        {/* Article list */}
-        {groupedArray?.map((group, index) => (
-          <NavPostItem
-            key={index}
-            group={group}
-            onHeightChange={props.onHeightChange}
-          />
-        ))}
-      </div>
-    );
   }
+
+  return (
+    <div id="records-wrapper" className="flex-grow w-full h-full ">
+      {groupedArray.map((group, index) => (
+        <NavPostItem
+          key={index}
+          group={group}
+          onHeightChange={props.onHeightChange}
+        />
+      ))}
+    </div>
+  );
 };
 
 export default NavPostList;

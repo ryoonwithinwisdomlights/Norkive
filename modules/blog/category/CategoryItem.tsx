@@ -1,5 +1,5 @@
 "use client";
-import React, { memo } from "react";
+import React, { memo, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { FolderIcon, FolderOpenIcon } from "lucide-react";
 
@@ -15,16 +15,18 @@ const CategoryItem = memo(function CategoryItem({
   categoryCount,
 }: CategoryItemProps) {
   const router = useRouter();
-  const onClick = (category: string) => {
-    router.push(`/category/${category}`);
-  };
+
+  const handleClick = useCallback(
+    (e: React.MouseEvent) => {
+      e.preventDefault();
+      router.push(`/category/${category}`);
+    },
+    [router, category]
+  );
 
   return (
     <div
-      onClick={(e) => {
-        e.preventDefault();
-        onClick(category);
-      }}
+      onClick={handleClick}
       className={
         (selected
           ? "hover:text-white dark:hover:text-white bg-neutral-600 text-white "
