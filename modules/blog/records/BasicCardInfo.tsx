@@ -1,4 +1,5 @@
 "use client";
+import React, { memo } from "react";
 import { useGlobal } from "@/lib/context/EssentialNavInfoProvider";
 import { useGeneralSiteSettings } from "@/lib/context/GeneralSiteSettingsProvider";
 import NotionPage from "@/modules/common/components/shared/NotionPage";
@@ -12,12 +13,12 @@ import TagItemMini from "../tag/TagItemMini";
  * @param {*} param0
  * @returns
  */
-const BasicCardInfo = ({
+const BasicCardInfo = memo(function BasicCardInfo({
   record,
   showPreview,
   showPageCover,
   showSummary,
-}: CardInfoDivProps) => {
+}: CardInfoDivProps) {
   const { locale } = useGeneralSiteSettings();
   const { handleRouter } = useGlobal({});
 
@@ -107,5 +108,6 @@ const BasicCardInfo = ({
       </div>
     </div>
   );
-};
+});
+
 export default BasicCardInfo;

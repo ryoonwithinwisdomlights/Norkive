@@ -1,6 +1,6 @@
 "use client";
+import React, { memo, useEffect, useState } from "react";
 import { BLOG } from "@/blog.config";
-import { useEffect, useState } from "react";
 
 function toBlogNumber(a: any) {
   let tempVal: any;
@@ -12,7 +12,7 @@ function toBlogNumber(a: any) {
   }
 }
 
-const Footer = () => {
+const Footer = memo(function Footer() {
   const d = new Date();
   const currentYear = d.getFullYear();
   const blogSince = toBlogNumber(BLOG.SINCE);
@@ -60,6 +60,6 @@ const Footer = () => {
       <h1 className="pt-1 hidden">{BLOG.TITLE}</h1>
     </footer>
   );
-};
+});
 
 export default Footer;

@@ -1,9 +1,18 @@
 "use client";
+import React, { memo } from "react";
 import { useGlobal } from "@/lib/context/EssentialNavInfoProvider";
 import { formatToKoreanDate } from "@/lib/utils/utils";
 import { Clock4Icon } from "lucide-react";
 
-export default function ArchiveInfo({ props }) {
+interface ArchiveInfoProps {
+  props?: {
+    page?: {
+      lastEditedDate?: string;
+    };
+  };
+}
+
+const ArchiveInfo = memo(function ArchiveInfo({ props }: ArchiveInfoProps) {
   const { notice } = useGlobal({ from: "ArchiveInfo" });
   const modRecord = props?.page ? props?.page : notice;
   if (!modRecord) {
@@ -18,4 +27,6 @@ export default function ArchiveInfo({ props }) {
       </span>
     </div>
   );
-}
+});
+
+export default ArchiveInfo;

@@ -1,10 +1,16 @@
+import React, { memo } from "react";
 import LazyImage from "./LazyImage";
+
+interface NotionIconProps {
+  icon?: string;
+}
+
 /**
  * notion icon
  * It may be emoji, it may be svg, it may be a picture
  * @returns
  */
-const NotionIcon = ({ icon }) => {
+const NotionIcon = memo(function NotionIcon({ icon }: NotionIconProps) {
   if (!icon) {
     return <></>;
   }
@@ -14,6 +20,6 @@ const NotionIcon = ({ icon }) => {
   }
 
   return <span className="mr-1">{icon}</span>;
-};
+});
 
 export default NotionIcon;

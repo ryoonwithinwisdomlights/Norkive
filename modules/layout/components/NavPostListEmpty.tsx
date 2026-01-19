@@ -1,5 +1,5 @@
 "use client";
-
+import React, { memo } from "react";
 import { useGeneralSiteSettings } from "@/lib/context/GeneralSiteSettingsProvider";
 
 /**
@@ -7,11 +7,11 @@ import { useGeneralSiteSettings } from "@/lib/context/GeneralSiteSettingsProvide
  * @returns {JSX.Element}
  * @constructor
  */
-const NavPostListEmpty = ({
+const NavPostListEmpty = memo(function NavPostListEmpty({
   searchKeyword = "none",
 }: {
   searchKeyword?: string;
-}) => {
+}) {
   const { locale } = useGeneralSiteSettings();
   return (
     <div className="text-neutral-500 dark:text-neutral-300 flex flex-col w-full items-center justify-center min-h-screen mx-auto md:-mt-20">
@@ -27,5 +27,6 @@ const NavPostListEmpty = ({
       </div>
     </div>
   );
-};
+});
+
 export default NavPostListEmpty;

@@ -1,5 +1,5 @@
 "use client";
-
+import React, { memo } from "react";
 import { ChevronUpIcon, CornerLeftUp } from "lucide-react";
 
 /**
@@ -10,7 +10,7 @@ import { ChevronUpIcon, CornerLeftUp } from "lucide-react";
  * @returns {JSX.Element}
  * @constructor
  */
-const JumpToTopButton = () => {
+const JumpToTopButton = memo(function JumpToTopButton() {
   const handleScrollToTop = () => {
     const targetContainer = document.getElementById("main-scroll-container"); //
     if (targetContainer) {
@@ -35,6 +35,6 @@ const JumpToTopButton = () => {
       />
     </div>
   );
-};
+});
 
 export default JumpToTopButton;

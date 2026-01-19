@@ -1,4 +1,5 @@
 "use client"; // 클라이언트 컴포넌트
+import React, { memo } from "react";
 import { BLOG } from "@/blog.config";
 import { useGlobal } from "@/lib/context/EssentialNavInfoProvider";
 import LazyImage from "@/modules/common/components/shared/LazyImage";
@@ -9,7 +10,7 @@ import Link from "next/link";
  * @param {*} props
  * @returns
  */
-export default function LogoBar() {
+const LogoBar = memo(function LogoBar() {
   const { siteInfo } = useGlobal({ from: "LogoBar" });
 
   return (
@@ -32,4 +33,6 @@ export default function LogoBar() {
       </Link>
     </div>
   );
-}
+});
+
+export default LogoBar;

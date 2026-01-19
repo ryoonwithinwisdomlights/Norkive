@@ -1,7 +1,8 @@
 "use client";
+import React, { memo } from "react";
 import { useGeneralSiteSettings } from "@/lib/context/GeneralSiteSettingsProvider";
 
-const NoRecordFound = () => {
+const NoRecordFound = memo(function NoRecordFound() {
   const { locale } = useGeneralSiteSettings();
   return (
     <div
@@ -12,6 +13,6 @@ const NoRecordFound = () => {
       {locale.SEARCH.NO_RECORD_FOUND}
     </div>
   );
-};
+});
 
 export default NoRecordFound;

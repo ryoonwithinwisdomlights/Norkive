@@ -1,10 +1,19 @@
 "use client";
+import React, { memo, useState } from "react";
 import { BLOG } from "@/blog.config";
 import AllRecordsPostCard from "@/modules/blog/records/AllRecordsPostCard";
 import Collapse from "@/modules/common/components/shared/Collapse";
 import { ChevronLeftIcon } from "lucide-react";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+
+interface NavPostItemProps {
+  group: {
+    category?: string;
+    selected?: boolean;
+    items?: any[];
+  };
+  onHeightChange?: (params: { height: number; increase: boolean }) => void;
+}
 
 /**
  * navigation list
@@ -13,8 +22,7 @@ import { useState } from "react";
  * @returns {JSX.Element}
  * @constructor
  */
-const NavPostItem = (props) => {
-  const { group } = props;
+const NavPostItem = memo(function NavPostItem({ group, onHeightChange }: NavPostItemProps) {
   const pathname = usePathname();
   const [isOpen, changeIsOpen] = useState(group?.selected);
   const toggleOpenSubMenu = () => {
@@ -39,7 +47,7 @@ const NavPostItem = (props) => {
             />
           </div>
         </div>
-        <Collapse isOpen={isOpen} onHeightChange={props.onHeightChange}>
+        <Collapse isOpen={isOpen} onHeightChange={onHeightChange}>
           {group?.items?.map((record) => {
             const currentSelected = pathname.split("/")[2] === record.id;
             return (
@@ -74,6 +82,6 @@ const NavPostItem = (props) => {
       </div>
     );
   }
-};
+});
 
 export default NavPostItem;

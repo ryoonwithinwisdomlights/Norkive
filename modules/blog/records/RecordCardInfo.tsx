@@ -1,9 +1,14 @@
-import React from "react";
+import React, { memo } from "react";
 import { usePathname } from "next/navigation";
 import ProjectCardInfo from "./ProjectCardInfo";
 import BasicCardInfo from "./BasicCardInfo";
 
-const RecordCardInfo = ({ item, showPageCover }) => {
+interface RecordCardInfoProps {
+  item: any;
+  showPageCover?: boolean;
+}
+
+const RecordCardInfo = memo(function RecordCardInfo({ item, showPageCover = false }: RecordCardInfoProps) {
   const pathname = usePathname();
   const type = pathname.split("/")[1];
 
@@ -22,6 +27,6 @@ const RecordCardInfo = ({ item, showPageCover }) => {
       showSummary={true}
     />
   );
-};
+});
 
 export default RecordCardInfo;

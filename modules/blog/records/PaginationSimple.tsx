@@ -1,7 +1,13 @@
 "use client";
+import React, { memo } from "react";
 import { useGeneralSiteSettings } from "@/lib/context/GeneralSiteSettingsProvider";
 import { ChevronRight } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
+
+interface PaginationSimpleProps {
+  pagenum: number | string;
+  totalPage: number;
+}
 
 /**
  * Simple page turning plug-in
@@ -10,7 +16,7 @@ import { usePathname, useRouter } from "next/navigation";
  * @returns {JSX.Element}
  * @constructor
  */
-const PaginationSimple = ({ pagenum, totalPage }) => {
+const PaginationSimple = memo(function PaginationSimple({ pagenum, totalPage }: PaginationSimpleProps) {
   const { locale } = useGeneralSiteSettings();
   const router = useRouter();
   const pathname = usePathname();
@@ -36,6 +42,6 @@ const PaginationSimple = ({ pagenum, totalPage }) => {
       </div>
     </div>
   );
-};
+});
 
 export default PaginationSimple;

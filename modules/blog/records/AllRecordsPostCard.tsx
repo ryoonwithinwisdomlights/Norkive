@@ -1,15 +1,16 @@
 "use client";
+import React, { memo } from "react";
 import { useGlobal } from "@/lib/context/EssentialNavInfoProvider";
 import { substringWithNumberDots } from "@/lib/utils/utils";
 import { NavListDivProps } from "@/types";
 import { usePathname } from "next/navigation";
 
-const AllRecordsPostCard = ({
+const AllRecordsPostCard = memo(function AllRecordsPostCard({
   record,
   className,
   substr,
   substrNumber,
-}: NavListDivProps) => {
+}: NavListDivProps) {
   const pathname = usePathname();
   const currentSelected = pathname.split("/")[2] === record.id;
   const { handleRouter } = useGlobal({});
@@ -34,6 +35,6 @@ const AllRecordsPostCard = ({
       </div>
     </div>
   );
-};
+});
 
 export default AllRecordsPostCard;

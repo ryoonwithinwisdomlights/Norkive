@@ -1,4 +1,5 @@
 "use client";
+import React, { memo } from "react";
 import { substringWithNumberDots } from "@/lib/utils/utils";
 import {
   ChevronLeft,
@@ -9,12 +10,17 @@ import {
 } from "lucide-react";
 import { useRouter } from "next/navigation";
 
+interface ArchiveAroundProps {
+  prev?: { slug: string; title: string };
+  next?: { slug: string; title: string; type: string };
+}
+
 /**
  * Previous article, next article
  * @param {prev,next} param0
  * @returns
  */
-export default function ArchiveAround({ prev, next }) {
+const ArchiveAround = memo(function ArchiveAround({ prev, next }: ArchiveAroundProps) {
   if (!prev || !next) {
     return <></>;
   }
@@ -62,4 +68,6 @@ export default function ArchiveAround({ prev, next }) {
       </div>
     </section>
   );
-}
+});
+
+export default ArchiveAround;

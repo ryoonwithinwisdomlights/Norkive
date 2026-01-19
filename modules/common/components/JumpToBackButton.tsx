@@ -1,9 +1,8 @@
 "use client";
-
+import React, { memo, useEffect, useState } from "react";
 import { useGeneralSiteSettings } from "@/lib/context/GeneralSiteSettingsProvider";
 import { MoveLeftIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
 
 // 사전에 사용할 아이콘 추가
 
@@ -15,7 +14,7 @@ import { useEffect, useState } from "react";
  * @returns {JSX.Element}
  * @constructor
  */
-const JumpToBackButton = () => {
+const JumpToBackButton = memo(function JumpToBackButton() {
   const router = useRouter();
   const { locale } = useGeneralSiteSettings();
   const handleBack = () => {
@@ -48,6 +47,6 @@ const JumpToBackButton = () => {
       </div>
     </div>
   );
-};
+});
 
 export default JumpToBackButton;

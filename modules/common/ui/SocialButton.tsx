@@ -1,4 +1,5 @@
 "use client";
+import React, { memo } from "react";
 import { BLOG } from "@/blog.config";
 
 import {
@@ -14,7 +15,7 @@ import {
  * @returns {JSX.Element}
  * @constructor
  */
-const SocialButton = () => {
+const SocialButton = memo(function SocialButton() {
   return (
     <div className="space-x-3 text-xl text-neutral-600 dark:text-neutral-400 flex-wrap flex justify-center ">
       {(BLOG.CONTACT_TWITTER as string).length > 0 && (
@@ -69,5 +70,6 @@ const SocialButton = () => {
       )}
     </div>
   );
-};
+});
+
 export default SocialButton;

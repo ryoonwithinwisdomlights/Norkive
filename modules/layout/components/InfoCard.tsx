@@ -1,11 +1,12 @@
 "use client";
+import React, { memo } from "react";
 /* eslint-disable no-unused-vars */
 import { BLOG } from "@/blog.config";
 import SocialButton from "@/modules/common/ui/SocialButton";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
-const InfoCard = () => {
+const InfoCard = memo(function InfoCard() {
   const router = useRouter();
 
   return (
@@ -50,6 +51,6 @@ const InfoCard = () => {
       <SocialButton />
     </div>
   );
-};
+});
 
 export default InfoCard;

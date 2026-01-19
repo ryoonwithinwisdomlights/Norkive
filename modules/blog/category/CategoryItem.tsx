@@ -1,17 +1,28 @@
 "use client";
+import React, { memo } from "react";
 import { useRouter } from "next/navigation";
-
 import { FolderIcon, FolderOpenIcon } from "lucide-react";
-export default function CategoryItem(props) {
-  const { selected, category, categoryCount } = props;
+
+interface CategoryItemProps {
+  selected?: boolean;
+  category: string;
+  categoryCount?: number;
+}
+
+const CategoryItem = memo(function CategoryItem({
+  selected,
+  category,
+  categoryCount,
+}: CategoryItemProps) {
   const router = useRouter();
   const onClick = (category: string) => {
     router.push(`/category/${category}`);
   };
-  // console.log("category::", category);
+
   return (
     <div
       onClick={(e) => {
+        e.preventDefault();
         onClick(category);
       }}
       className={
@@ -31,4 +42,6 @@ export default function CategoryItem(props) {
       </div>
     </div>
   );
-}
+});
+
+export default CategoryItem;

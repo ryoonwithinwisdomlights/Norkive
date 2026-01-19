@@ -1,4 +1,5 @@
 "use client";
+import React, { memo } from "react";
 import { BLOG } from "@/blog.config";
 import copy from "copy-to-clipboard";
 
@@ -17,13 +18,21 @@ import {
 
 import { useGeneralSiteSettings } from "@/lib/context/GeneralSiteSettingsProvider";
 import { LinkIcon } from "lucide-react";
+
+interface ShareButtonsProps {
+  shareUrl: string;
+  title: string;
+  body?: string;
+  image?: string;
+}
+
 // 사전에 사용할 아이콘 추가
 /**
  * @author https://github.com/txs
  * @param {*} param0
  * @returns
  */
-const ShareButtons = ({ shareUrl, title, body, image }) => {
+const ShareButtons = memo(function ShareButtons({ shareUrl, title, body, image }: ShareButtonsProps) {
   const services = BLOG.RECORD_SHARE_SERVICE.split(",");
   const titleWithSiteInfo = title + " | " + BLOG.TITLE;
   const { locale } = useGeneralSiteSettings();
@@ -114,6 +123,6 @@ const ShareButtons = ({ shareUrl, title, body, image }) => {
       })}
     </>
   );
-};
+});
 
 export default ShareButtons;
