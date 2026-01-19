@@ -1,5 +1,6 @@
 import { BLOG } from "@/blog.config";
-// import { CodeLanguages } from "@/constants/code.languge";
+import { NOTION_PROPERTY_CONFIG } from "@/config/notion.property.config";
+
 import {
   ARCHIVE_PROPERTIES_STATUS_MAP,
   ARCHIVE_PROPERTIES_TYPE_MAP,
@@ -68,7 +69,7 @@ export function getPageCover(postInfo) {
 export function getTagOptions(schema: CollectionPropertySchemaMap) {
   if (!schema) return [];
   const tagSchema = Object.values(schema).find(
-    (element) => element.name === BLOG.NOTION_PROPERTY_NAME.type_tags
+    (element) => element.name === NOTION_PROPERTY_CONFIG.type_tags
   ) as TagItem | undefined;
   return tagSchema?.options || [];
 }
@@ -81,7 +82,7 @@ export function getTagOptions(schema: CollectionPropertySchemaMap) {
 export function getCategoryOptions(schema: CollectionPropertySchemaMap) {
   if (!schema) return {};
   const categorySchema = Object.values(schema).find(
-    (e) => e.name === BLOG.NOTION_PROPERTY_NAME.type_category
+    (e) => e.name === NOTION_PROPERTY_CONFIG.type_category
   ) as CategoryItem | undefined;
   return categorySchema?.options || [];
 }

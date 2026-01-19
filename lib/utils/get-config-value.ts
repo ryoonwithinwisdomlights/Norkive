@@ -179,7 +179,7 @@ export const convertVal = (val) => {
 export const siteConfigMap = () => {
   const val = deepClone(BLOG);
   for (const key in val) {
-    val[key] = getOldsiteConfig({ key: key });
+    val[key] = getOldsiteConfig({ key });
   }
   return val;
 };
