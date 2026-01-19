@@ -1,10 +1,12 @@
 export const SITE_CONFIG = {
-    TITLE: process.env.NEXT_PUBLIC_TITLE || "Ryoon.Gitbook.Log", // 사이트 메타 타이틀입니다. 이 부분을 바꿔주세요.
-    DESCRIPTION: process.env.NEXT_PUBLIC_DESCRIPTION ||
-    "Ryoon.Gitbook.Log - A Static WebBlog for your every Recorded Archive in Notion with Next.js 15",//메타 설명입니다. 이 부분을 바꿔주세요.
-    LINK: process.env.NEXT_PUBLIC_LINK || "https://ryoongitbooklog.vercel.app/", // 사이트 링크를 교체해주세요.
-  AVATAR: "/images/rwwl.png", //프로필 이미지를 바꿔주세요. 기본 이미지는 /images/rwwl.png 입니다.
+  // ============ 사이트 메타 정보 ============
+  TITLE: process.env.NEXT_PUBLIC_TITLE || "Ryoon.Gitbook.Log", // 사이트 타이틀 (브라우저 탭, SEO)
+  DESCRIPTION: process.env.NEXT_PUBLIC_DESCRIPTION ||
+    "Ryoon.Gitbook.Log - A Static WebBlog for your every Recorded Archive in Notion with Next.js 15", // 사이트 설명 (SEO meta description)
+  LINK: process.env.NEXT_PUBLIC_LINK || "https://ryoongitbooklog.vercel.app/", // 사이트 절대 URL (sitemap, 공유 링크 base)
+  
+  // ============ 이미지 에셋 ============
+  AVATAR: "/images/rwwl.png", // 프로필 아바타 이미지 경로 (우측 패널, Notion 아이콘 없을 때 대체)
   HOME_BANNER_IMAGE:
-  process.env.NEXT_PUBLIC_HOME_BANNER_IMAGE || "/images/rwwl_background.png", //홈 배너 이미지를 바꿔주세요. 기본 이미지는 /images/rwwl_background.png 입니다.
-
+    process.env.NEXT_PUBLIC_HOME_BANNER_IMAGE || "/images/rwwl_background.png", // 홈 배너/기본 커버 이미지 (Notion 커버 없을 때 대체)
 };

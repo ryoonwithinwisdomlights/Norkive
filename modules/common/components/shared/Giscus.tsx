@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 import { useGeneralSiteSettings } from "@/lib/context/GeneralSiteSettingsProvider";
 import { useEffect, useRef } from "react";
@@ -52,7 +53,7 @@ const GiscusComponent = () => {
     scriptElem.setAttribute("data-lang", giscusLang);
     scriptElem.setAttribute("data-loading", "lazy");
     ref.current.appendChild(scriptElem);
-  }, [theme, locale]);
+  }, []);
 
   // https://github.com/giscus/giscus/blob/main/ADVANCED-USAGE.md#isetconfigmessage
   useEffect(() => {
